@@ -29,7 +29,7 @@ main{padding:30px;min-width:0}.top{display:flex;align-items:center;justify-conte
 /* Point of sale */
 .pos-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(380px,.9fr);gap:16px;align-items:start}
 .pos-catalog,.pos-sale{background:var(--panel);border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow);min-width:0}
-.pos-register-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:-10px 0 14px;padding:11px 14px;background:var(--panel);border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow)}.pos-register-indicator{display:flex;align-items:center;gap:10px;min-width:0}.pos-register-dot{width:10px;height:10px;flex:0 0 10px;border-radius:50%;background:var(--red)}.pos-register-dot.open{background:var(--green)}.pos-register-dot.pending{background:var(--brand)}.pos-register-status{display:block;font-weight:800;font-size:12px}.pos-register-detail{display:block;color:var(--muted);font-size:11px}.pos-register-controls{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.pos-register-controls button:disabled{opacity:.5;cursor:not-allowed}
+.pos-register-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:-10px 0 14px;padding:11px 14px;background:var(--panel);border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow)}.pos-register-indicator{display:flex;align-items:center;gap:10px;min-width:0}.pos-register-dot{width:10px;height:10px;flex:0 0 10px;border-radius:50%;background:var(--red)}.pos-register-dot.open{background:var(--green)}.pos-register-dot.pending{background:var(--brand)}.pos-register-status{display:block;font-weight:800;font-size:12px}.pos-register-detail{display:block;color:var(--muted);font-size:11px}.pos-register-controls{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.pos-register-controls button:disabled{opacity:.5;cursor:not-allowed}.pos-register-controls button[hidden]{display:none}
 .pos-catalog{padding:14px}.pos-filter-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;align-items:center;margin-bottom:13px}
 .pos-catalog-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px}.pos-catalog-head h2{font-size:16px;margin:0}.pos-active-offers-btn{background:var(--soft);color:var(--ink);padding:8px 11px;font-size:12px}.pos-active-offers-btn:hover{background:var(--computed-bg)}
 .pos-search{position:relative}.pos-search input,.pos-select,.pos-sale input,.pos-sale select,.pos-sale textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--input-bg);color:var(--ink);outline:none}
@@ -141,7 +141,7 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
     <button data-page="ventas"><span class="ico">🛒</span> Punto de venta</button>
     <button data-page="reportes"><span class="ico">▥</span> Reportes</button>
   </nav>
-  <div class="sidebar-foot"><button id="settingsBtn" class="theme-toggle" type="button">⚙ <span>Ajustes</span></button><button id="themeToggle" class="theme-toggle" type="button" aria-label="Activar modo oscuro" title="Cambiar tema">☾ <span>Modo oscuro</span></button><button id="versionNotesBtn" class="theme-toggle" type="button">ⓘ <span>Notas de la versión</span></button><div style="margin-top:12px">Versión 2.13 · Datos guardados en esta computadora y navegador.</div></div>
+  <div class="sidebar-foot"><button id="settingsBtn" class="theme-toggle" type="button">⚙ <span>Ajustes</span></button><button id="themeToggle" class="theme-toggle" type="button" aria-label="Activar modo oscuro" title="Cambiar tema">☾ <span>Modo oscuro</span></button><button id="versionNotesBtn" class="theme-toggle" type="button">ⓘ <span>Notas de la versión</span></button><div style="margin-top:12px">Versión 2.14 · Datos guardados en esta computadora y navegador.</div></div>
 </aside>
 <main>
   <section id="page-inventario" class="page active">
@@ -163,7 +163,7 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
   </section>
   <section id="page-ventas" class="page">
    <div class="top"><div><div class="eyebrow">CAJA</div><h1>🛒 Punto de venta</h1><p class="subtitle">Selecciona productos del inventario para registrar una venta.</p></div><div class="pos-topright"><span class="pill">Q · Quetzales</span><span class="pos-datetime"><span id="posDate"></span><span id="posTime"></span></span><span class="pos-user-icon" aria-label="Usuario">♙</span></div></div>
-   <div class="pos-register-bar"><div class="pos-register-indicator"><span id="cashRegisterDot" class="pos-register-dot" aria-hidden="true"></span><div><strong id="cashRegisterStatus" class="pos-register-status" aria-live="polite">Caja cerrada</strong><small id="cashRegisterDetail" class="pos-register-detail">Abre la caja para iniciar las ventas del día.</small></div></div><div class="pos-register-controls"><button type="button" id="openCashRegisterBtn" class="btn-primary btn-small">＋ Apertura de caja</button><button type="button" id="closeCashRegisterBtn" class="btn-light btn-small" disabled>▣ Cierre de caja</button></div></div>
+   <div class="pos-register-bar"><div class="pos-register-indicator"><span id="cashRegisterDot" class="pos-register-dot" aria-hidden="true"></span><div><strong id="cashRegisterStatus" class="pos-register-status" aria-live="polite">Caja cerrada</strong><small id="cashRegisterDetail" class="pos-register-detail">Abre la caja para iniciar las ventas del día.</small></div></div><div class="pos-register-controls"><button type="button" id="openCashRegisterBtn" class="btn-primary btn-small">＋ Apertura de caja</button><button type="button" id="reopenCashRegisterBtn" class="btn-primary btn-small" hidden>↻ Reabrir caja</button><button type="button" id="closeCashRegisterBtn" class="btn-light btn-small" disabled>▣ Cierre de caja</button></div></div>
    <div class="pos-layout">
     <section class="pos-catalog" aria-label="Catálogo de productos">
      <div class="pos-catalog-head"><h2>Productos</h2><button type="button" class="pos-active-offers-btn" id="showActiveOffersBtn">🏷 Ofertas activas (0)</button></div>
@@ -297,8 +297,8 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
 </div>
 <div class="overlay" id="versionNotesOverlay" role="dialog" aria-modal="true" aria-labelledby="versionNotesTitle" style="z-index:20">
  <div class="modal" style="width:min(500px,100%)">
-  <div class="modal-head"><div><h2 id="versionNotesTitle">Notas de la versión 2.13</h2><p>Avance actual del proyecto</p></div><button class="x" id="closeVersionNotes" aria-label="Cerrar notas de la versión">×</button></div>
-  <div class="form"><p style="margin:0;color:var(--ink)">El Punto de venta ahora requiere abrir la caja cada día y permite registrar la apertura y el cierre con el efectivo esperado.</p></div>
+  <div class="modal-head"><div><h2 id="versionNotesTitle">Notas de la versión 2.14</h2><p>Avance actual del proyecto</p></div><button class="x" id="closeVersionNotes" aria-label="Cerrar notas de la versión">×</button></div>
+  <div class="form"><p style="margin:0;color:var(--ink)">Puedes reabrir la caja que cerraste hoy sin borrar las ventas. El nuevo período conserva el efectivo contado al cierre anterior.</p></div>
   <div class="modal-actions"><span></span><button type="button" class="btn-light" id="doneVersionNotes">Cerrar</button></div>
  </div>
 </div>
@@ -340,8 +340,8 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
 </div>
 <div class="overlay" id="cashOpeningOverlay" role="dialog" aria-modal="true" aria-labelledby="cashOpeningTitle" style="z-index:50">
  <div class="modal" style="width:min(480px,100%)">
-  <div class="modal-head"><div><h2 id="cashOpeningTitle">Apertura de caja</h2><p>Registra el efectivo inicial antes de comenzar las ventas de hoy.</p></div><button class="x" id="closeCashOpening" aria-label="Cerrar apertura de caja">×</button></div>
-  <form id="cashOpeningForm"><div class="form"><div class="field"><label for="cashOpeningAmount">Efectivo inicial en caja (Q)</label><input id="cashOpeningAmount" type="number" min="0" step="0.01" value="0.00" required></div><p class="hint" style="margin-bottom:0">El monto se usará para calcular el efectivo esperado al cierre.</p></div><div class="modal-actions"><button type="button" class="btn-light" id="cancelCashOpening">Cancelar</button><button type="submit" class="btn-primary">Abrir caja</button></div></form>
+  <div class="modal-head"><div><h2 id="cashOpeningTitle">Apertura de caja</h2><p id="cashOpeningDescription">Registra el efectivo inicial antes de comenzar las ventas de hoy.</p></div><button class="x" id="closeCashOpening" aria-label="Cerrar apertura de caja">×</button></div>
+  <form id="cashOpeningForm"><div class="form"><div class="field"><label for="cashOpeningAmount">Efectivo inicial en caja (Q)</label><input id="cashOpeningAmount" type="number" min="0" step="0.01" value="0.00" required></div><p class="hint" style="margin-bottom:0">El monto se usará para calcular el efectivo esperado al cierre.</p></div><div class="modal-actions"><button type="button" class="btn-light" id="cancelCashOpening">Cancelar</button><button type="submit" id="cashOpeningSubmit" class="btn-primary">Abrir caja</button></div></form>
  </div>
 </div>
 <div class="overlay" id="cashClosingOverlay" role="dialog" aria-modal="true" aria-labelledby="cashClosingTitle" style="z-index:50">
@@ -403,7 +403,7 @@ const SALES_KEY='prendaStudioSales_v1';
 const CASH_REGISTER_KEY='prendaStudioCashRegister_v1';
 const OFFERS_KEY='prendaStudioOffers_v1';
 const SETTINGS_KEY='prendaStudioSettings_v1';
-let products=[], sales=[], cashSessions=[], posCart=[], offers=[], paymentMethod='Efectivo', posCashTouched=false, financialValuesVisible=true, editingOfferId=null, editingPOSPriceId=null, editingId=null, skuManuallyEdited=false, syncSource=null, currentPhoto='', cameraStream=null, cameraRequestId=0, quickOptionKind='category', currentBarcodeSvg='', currentBarcodeSku='', barcodePreviewUrl='', scanStream=null, scanRequestId=0, scanActive=false, scanDetector=null, scanFrame=0, scanCanvas=null, scanLastAttempt=0, scanAction='inventory', closingCashSessionId=null;
+let products=[], sales=[], cashSessions=[], posCart=[], offers=[], paymentMethod='Efectivo', posCashTouched=false, financialValuesVisible=true, editingOfferId=null, editingPOSPriceId=null, editingId=null, skuManuallyEdited=false, syncSource=null, currentPhoto='', cameraStream=null, cameraRequestId=0, quickOptionKind='category', currentBarcodeSvg='', currentBarcodeSku='', barcodePreviewUrl='', scanStream=null, scanRequestId=0, scanActive=false, scanDetector=null, scanFrame=0, scanCanvas=null, scanLastAttempt=0, scanAction='inventory', closingCashSessionId=null, cashOpeningMode='new', cashReopenSourceId=null;
 const CAT_KEY='prendaStudioCategories_v1', COLOR_KEY='prendaStudioColors_v1';
 let categories=['Camisetas','Pantalones','Vestidos','Accesorios','Calzado'], colors=['N/A','Negro','Blanco','Azul','Rojo','Verde','Gris','Beige','Rosado'];
 try{products=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');if(!Array.isArray(products))products=[]}catch(e){products=[]}
@@ -606,34 +606,41 @@ function updateCashRegisterUI(){
  const active=getOpenCashSession(),todaySession=getTodayCashSession(),canSell=cashRegisterCanSell();let title='Caja cerrada',detail='Abre la caja para iniciar las ventas del día.';
  if(active&&active.date===localDateValue()){title='Caja abierta';detail='Apertura: '+cashDateTimeLabel(active.openedAt)+' · Fondo inicial '+money(active.openingAmount)}
  else if(active){title='Caja pendiente de cierre';detail='Cierra la caja del '+active.date+' antes de abrir la de hoy.'}
- else if(todaySession&&todaySession.closedAt){title='Caja cerrada hoy';detail='Cierre: '+cashDateTimeLabel(todaySession.closedAt)+' · No se puede reabrir hoy.'}
+ else if(todaySession&&todaySession.closedAt){title='Caja cerrada hoy';detail='Cierre: '+cashDateTimeLabel(todaySession.closedAt)+' · Puedes reabrirla y conservar las ventas.'}
  $('cashRegisterStatus').textContent=title;$('cashRegisterDetail').textContent=detail;$('cashRegisterDot').classList.toggle('open',canSell);$('cashRegisterDot').classList.toggle('pending',Boolean(active&&!canSell));
- $('openCashRegisterBtn').disabled=Boolean(active||todaySession);$('closeCashRegisterBtn').disabled=!active;
+ const canReopen=Boolean(!active&&todaySession&&todaySession.closedAt);$('openCashRegisterBtn').hidden=Boolean(todaySession);$('openCashRegisterBtn').disabled=Boolean(active||todaySession);$('reopenCashRegisterBtn').hidden=!canReopen;$('reopenCashRegisterBtn').disabled=!canReopen;$('closeCashRegisterBtn').disabled=!active;
  $('addExtraProductBtn').disabled=!canSell;$('posBarcodeAddBtn').disabled=!canSell;
 }
 function ensureCashRegisterOpen(){
  if(cashRegisterCanSell())return true;
  const active=getOpenCashSession(),todaySession=getTodayCashSession();
  if(active)toast(active.date===localDateValue()?'La caja está cerrada.':'Cierra primero la caja pendiente del '+active.date+'.');
- else if(todaySession&&todaySession.closedAt)toast('La caja ya se cerró hoy y no puede reabrirse.');
+ else if(todaySession&&todaySession.closedAt)toast('La caja está cerrada. Usa “Reabrir caja” para continuar.');
  else{toast('Abre la caja antes de agregar productos o registrar ventas.');openCashOpeningForm()}
  return false;
 }
 function openCashOpeningForm(){
  const active=getOpenCashSession(),todaySession=getTodayCashSession();
  if(active){toast(active.date===localDateValue()?'La caja ya está abierta.':'Cierra primero la caja pendiente del '+active.date+'.');return}
- if(todaySession){toast('La caja ya se cerró hoy y no puede reabrirse.');return}
- $('cashOpeningForm').reset();$('cashOpeningAmount').value='0.00';$('cashOpeningOverlay').classList.add('show');setTimeout(()=>$('cashOpeningAmount').focus(),30);
+ if(todaySession){toast('La caja ya tuvo una apertura hoy. Usa “Reabrir caja” si necesitas continuar.');return}
+ cashOpeningMode='new';cashReopenSourceId=null;$('cashOpeningForm').reset();$('cashOpeningTitle').textContent='Apertura de caja';$('cashOpeningDescription').textContent='Registra el efectivo inicial antes de comenzar las ventas de hoy.';$('cashOpeningSubmit').textContent='Abrir caja';$('cashOpeningAmount').value='0.00';$('cashOpeningOverlay').classList.add('show');setTimeout(()=>$('cashOpeningAmount').focus(),30);
 }
-function closeCashOpeningForm(){$('cashOpeningOverlay').classList.remove('show')}
+function openCashReopeningForm(){
+ const active=getOpenCashSession(),session=getTodayCashSession();if(active||!session||!session.closedAt){toast('No hay una caja cerrada hoy para reabrir.');return}
+ if(posCart.length){toast('Limpia la venta pendiente antes de reabrir la caja.');return}
+ cashOpeningMode='reopen';cashReopenSourceId=session.id;$('cashOpeningForm').reset();$('cashOpeningTitle').textContent='Reabrir caja';$('cashOpeningDescription').textContent='Se conservarán las ventas anteriores. Ingresa el efectivo contado disponible para continuar.';$('cashOpeningSubmit').textContent='Reabrir caja';$('cashOpeningAmount').value=Number(session.countedCash??session.expectedCash??session.openingAmount??0).toFixed(2);$('cashOpeningOverlay').classList.add('show');setTimeout(()=>$('cashOpeningAmount').focus(),30);
+}
+function closeCashOpeningForm(){$('cashOpeningOverlay').classList.remove('show');cashOpeningMode='new';cashReopenSourceId=null}
 function saveCashOpening(event){
  event.preventDefault();const amount=Number($('cashOpeningAmount').value);
  if(!Number.isFinite(amount)||amount<0){toast('Ingresa un monto inicial válido.');$('cashOpeningAmount').focus();return}
  if(getOpenCashSession()){toast('Ya hay una caja abierta.');closeCashOpeningForm();updateCashRegisterUI();return}
- if(getTodayCashSession()){toast('La caja ya se abrió y cerró hoy; no puede abrirse otra vez.');closeCashOpeningForm();updateCashRegisterUI();return}
- const previous=cashSessions,session={id:'C-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase(),date:localDateValue(),openedAt:new Date().toISOString(),openingAmount:roundMoney(amount),closedAt:null};cashSessions=[session,...cashSessions];
+ const reopening=cashOpeningMode==='reopen',source=reopening?cashSessions.find(item=>item.id===cashReopenSourceId):null;
+ if(reopening&&(!source||source.date!==localDateValue()||!source.closedAt)){toast('La caja que intentas reabrir ya no está cerrada hoy.');closeCashOpeningForm();updateCashRegisterUI();return}
+ if(!reopening&&getTodayCashSession()){toast('La caja ya tuvo una apertura hoy.');closeCashOpeningForm();updateCashRegisterUI();return}
+ const previous=cashSessions,session={id:'C-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase(),date:localDateValue(),openedAt:new Date().toISOString(),openingAmount:roundMoney(amount),closedAt:null,...(reopening?{reopenedFrom:source.id}:{})};cashSessions=[session,...cashSessions];
  if(!saveCashSessions()){cashSessions=previous;return}
- closeCashOpeningForm();renderPOS();toast('Caja abierta. Ya puedes agregar productos y registrar ventas.');
+ closeCashOpeningForm();renderPOS();toast(reopening?'Caja reabierta. Se conservaron las ventas anteriores.':'Caja abierta. Ya puedes agregar productos y registrar ventas.');
 }
 function openCashClosingForm(){
  const session=getOpenCashSession();if(!session){toast('No hay una caja abierta para cerrar.');return}
@@ -653,7 +660,7 @@ function saveCashClosing(event){
  if(!saveCashSessions()){cashSessions=previous;return}
  $('cashClosingOverlay').classList.remove('show');closingCashSessionId=null;renderPOS();const difference=roundMoney(counted-expected);toast('Caja cerrada. Diferencia: '+(difference<0?'−':'')+money(Math.abs(difference))+'.');
 }
-function enterPOS(){renderPOS();const active=getOpenCashSession(),todaySession=getTodayCashSession();if(active&&active.date!==localDateValue())toast('Debes cerrar la caja pendiente antes de abrir la de hoy.');else if(todaySession&&todaySession.closedAt)toast('La caja ya fue cerrada hoy. Las ventas están deshabilitadas.');else if(!active&&!todaySession)openCashOpeningForm()}
+function enterPOS(){renderPOS();const active=getOpenCashSession(),todaySession=getTodayCashSession();if(active&&active.date!==localDateValue())toast('Debes cerrar la caja pendiente antes de abrir la de hoy.');else if(todaySession&&todaySession.closedAt)toast('La caja está cerrada. Puedes usar “Reabrir caja” para continuar.');else if(!active&&!todaySession)openCashOpeningForm()}
 function renderPOS(){
  if(!$('posProductGrid'))return;
  updateCashRegisterUI();
@@ -1146,6 +1153,7 @@ $('posColorFilter').addEventListener('change',renderPOS);
 $('posStockOnly').addEventListener('change',renderPOS);
 $('clearSaleBtn').addEventListener('click',clearPOSSale);
 $('openCashRegisterBtn').addEventListener('click',openCashOpeningForm);
+$('reopenCashRegisterBtn').addEventListener('click',openCashReopeningForm);
 $('closeCashRegisterBtn').addEventListener('click',openCashClosingForm);
 $('cashOpeningForm').addEventListener('submit',saveCashOpening);
 $('closeCashOpening').addEventListener('click',closeCashOpeningForm);
