@@ -139,7 +139,7 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
     <button data-page="ventas"><span class="ico">🛒</span> Punto de venta</button>
     <button data-page="reportes"><span class="ico">▥</span> Reportes</button>
   </nav>
-  <div class="sidebar-foot"><button id="settingsBtn" class="theme-toggle" type="button">⚙ <span>Ajustes</span></button><button id="themeToggle" class="theme-toggle" type="button" aria-label="Activar modo oscuro" title="Cambiar tema">☾ <span>Modo oscuro</span></button><button id="versionNotesBtn" class="theme-toggle" type="button">ⓘ <span>Notas de la versión</span></button><div style="margin-top:12px">Versión 2.11 · Datos guardados en esta computadora y navegador.</div></div>
+  <div class="sidebar-foot"><button id="settingsBtn" class="theme-toggle" type="button">⚙ <span>Ajustes</span></button><button id="themeToggle" class="theme-toggle" type="button" aria-label="Activar modo oscuro" title="Cambiar tema">☾ <span>Modo oscuro</span></button><button id="versionNotesBtn" class="theme-toggle" type="button">ⓘ <span>Notas de la versión</span></button><div style="margin-top:12px">Versión 2.12 · Datos guardados en esta computadora y navegador.</div></div>
 </aside>
 <main>
   <section id="page-inventario" class="page active">
@@ -294,8 +294,8 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
 </div>
 <div class="overlay" id="versionNotesOverlay" role="dialog" aria-modal="true" aria-labelledby="versionNotesTitle" style="z-index:20">
  <div class="modal" style="width:min(500px,100%)">
-  <div class="modal-head"><div><h2 id="versionNotesTitle">Notas de la versión 2.11</h2><p>Avance actual del proyecto</p></div><button class="x" id="closeVersionNotes" aria-label="Cerrar notas de la versión">×</button></div>
-  <div class="form"><p style="margin:0;color:var(--ink)">En el Punto de venta, las ventanas para cambiar el precio y configurar el descuento por producto permanecen abiertas hasta cerrarlas con sus controles.</p></div>
+  <div class="modal-head"><div><h2 id="versionNotesTitle">Notas de la versión 2.12</h2><p>Avance actual del proyecto</p></div><button class="x" id="closeVersionNotes" aria-label="Cerrar notas de la versión">×</button></div>
+  <div class="form"><p style="margin:0;color:var(--ink)">Los descuentos por producto redondean el total de cada línea al quetzal más cercano, con la misma regla aplicada al descuento general.</p></div>
   <div class="modal-actions"><span></span><button type="button" class="btn-light" id="doneVersionNotes">Cerrar</button></div>
  </div>
 </div>
@@ -350,7 +350,7 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
 <div class="overlay" id="lineDiscountOverlay" role="dialog" aria-modal="true" aria-labelledby="lineDiscountTitle" style="z-index:37">
  <div class="modal" style="width:min(480px,100%)">
   <div class="modal-head"><div><h2 id="lineDiscountTitle">Descuento de producto</h2><p id="lineDiscountProductName"></p></div><button class="x" id="closeLineDiscount" aria-label="Cerrar descuento de producto">×</button></div>
-  <form id="lineDiscountForm"><div class="form"><input id="lineDiscountProductId" type="hidden"><p class="pos-discount-form-note">Este descuento afecta solo a este producto en la venta actual.</p><div class="field" style="margin-top:14px"><label for="lineDiscountType">Tipo de descuento</label><select id="lineDiscountType"><option value="percent">Porcentaje (%)</option><option value="amount">Quetzales por unidad (Q)</option></select></div><div class="field" style="margin-top:12px"><label for="lineDiscountValue">Cantidad</label><input id="lineDiscountValue" type="number" min="0" step="0.01" value="0" required></div></div><div class="modal-actions"><button type="button" class="btn-danger" id="removeLineDiscount">Quitar descuento</button><div class="right-actions"><button type="button" class="btn-light" id="cancelLineDiscount">Cancelar</button><button type="submit" class="btn-primary">Aplicar</button></div></div></form>
+  <form id="lineDiscountForm"><div class="form"><input id="lineDiscountProductId" type="hidden"><p class="pos-discount-form-note">Afecta solo a este producto. El total de la línea se redondea al quetzal más cercano; desde Q0.50 sube.</p><div class="field" style="margin-top:14px"><label for="lineDiscountType">Tipo de descuento</label><select id="lineDiscountType"><option value="percent">Porcentaje (%)</option><option value="amount">Quetzales por unidad (Q)</option></select></div><div class="field" style="margin-top:12px"><label for="lineDiscountValue">Cantidad</label><input id="lineDiscountValue" type="number" min="0" step="0.01" value="0" required></div></div><div class="modal-actions"><button type="button" class="btn-danger" id="removeLineDiscount">Quitar descuento</button><div class="right-actions"><button type="button" class="btn-light" id="cancelLineDiscount">Cancelar</button><button type="submit" class="btn-primary">Aplicar</button></div></div></form>
  </div>
 </div>
 <div class="overlay" id="saleSuccessOverlay" role="dialog" aria-modal="true" aria-labelledby="saleSuccessTitle" style="z-index:45">
@@ -552,7 +552,13 @@ function posCartQty(productId){const item=posCart.find(entry=>entry.productId===
 function roundMoney(value){return Math.round((Number(value||0)+Number.EPSILON)*100)/100}
 function roundPOSWhole(value){const n=Math.max(0,Number(value)||0),whole=Math.floor(n);return n-whole>=0.5?whole+1:whole}
 function cartEntryProduct(entry){return entry.custom?entry:products.find(product=>product.id===entry.productId)}
-function cartEntryDiscount(entry){const gross=Number(entry.unitPrice||0)*Number(entry.quantity||0),value=Math.max(0,Number(entry.discountValue||0));if(entry.discountType==='percent')return roundMoney(Math.min(gross,gross*value/100));return roundMoney(Math.min(gross,value*Number(entry.quantity||0)))}
+function cartEntryDiscount(entry){
+ const unitPrice=Number(entry.unitPrice||0),quantity=Number(entry.quantity||0),gross=roundMoney(unitPrice*quantity),value=Math.max(0,Number(entry.discountValue||0));
+ if(value===0)return 0;
+ const requested=entry.discountType==='percent'?gross*value/100:value*quantity;
+ const discountedTotal=Math.max(0,gross-requested),roundedTotal=Math.min(gross,roundPOSWhole(discountedTotal));
+ return roundMoney(gross-roundedTotal);
+}
 function getPOSTotals(){
  const subtotal=roundMoney(posCart.reduce((sum,entry)=>sum+Number(entry.unitPrice||0)*entry.quantity,0));
  const itemDiscount=roundMoney(posCart.reduce((sum,entry)=>sum+cartEntryDiscount(entry),0)),discountBase=Math.max(0,subtotal-itemDiscount),type=$('posDiscountType').value,entered=Number($('posDiscount').value||0);
