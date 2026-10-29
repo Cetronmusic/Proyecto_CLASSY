@@ -32,6 +32,11 @@ main{padding:30px;min-width:0}.top{display:flex;align-items:center;justify-conte
 .pos-register-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:-10px 0 14px;padding:11px 14px;background:var(--panel);border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow)}.pos-register-indicator{display:flex;align-items:center;gap:10px;min-width:0}.pos-register-dot{width:10px;height:10px;flex:0 0 10px;border-radius:50%;background:var(--red)}.pos-register-dot.open{background:var(--green)}.pos-register-dot.pending{background:var(--brand)}.pos-register-status{display:block;font-weight:800;font-size:12px}.pos-register-detail{display:block;color:var(--muted);font-size:11px}.pos-register-controls{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.pos-register-controls button:disabled{opacity:.5;cursor:not-allowed}.pos-register-controls button[hidden]{display:none}
 .cash-expenses-list{display:grid;gap:8px;max-height:230px;overflow:auto}.cash-expense-row{display:flex;justify-content:space-between;gap:12px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}.cash-expense-description{min-width:0}.cash-expense-description strong{display:block;overflow-wrap:anywhere;font-size:12px}.cash-expense-description small{color:var(--muted);font-size:10px}.cash-expense-amount{white-space:nowrap;font-weight:800;font-variant-numeric:tabular-nums}.cash-expense-summary{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px}.cash-expense-summary>div{padding:11px;border:1px solid var(--line);border-radius:10px}.cash-expense-summary span{display:block;color:var(--muted);font-size:11px}.cash-expense-summary strong{display:block;margin-top:3px;font-size:16px}
 .cash-closing-section-title{display:block;padding-top:5px;font-size:12px;color:var(--brand)}.cash-closing-method-rows{display:grid;gap:5px;padding-left:8px}.cash-closing-method-rows .sale-receipt-line{font-size:12px}
+.order-status-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.order-status-tile{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;min-height:132px;padding:17px;background:var(--panel);border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow);color:var(--ink);text-align:left}.order-status-tile:hover{border-color:var(--brand);transform:translateY(-1px)}.order-status-tile span{color:var(--muted);font-size:12px}.order-status-tile strong{font-size:28px;line-height:1.15}.order-status-tile small{color:var(--brand);font-weight:700}.order-channel-list{display:grid;gap:8px;max-height:300px;overflow:auto}.order-channel-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 10px;border:1px solid var(--line);border-radius:10px}.order-detail-readonly{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--soft);color:var(--ink);font-size:12px;white-space:pre-wrap}.order-detail-readonly strong{display:block}.order-detail-readonly small{display:block;margin-top:3px;color:var(--muted)}.order-status-badge{display:inline-flex;padding:4px 8px;border-radius:20px;background:var(--soft);font-size:11px;font-weight:750;white-space:nowrap}.order-status-badge[data-status="delivered"]{background:#e8f7ef;color:#17774f}.order-status-badge[data-status="cancelled"]{background:#ffebed;color:#ba3441}.order-status-badge[data-status="pending_payment"]{background:#fff3df;color:#a7670b}
+.order-status-grid[hidden]{display:none}
+body.dark .order-status-badge[data-status="delivered"]{background:#193c32;color:#7be0b2}body.dark .order-status-badge[data-status="cancelled"]{background:#48262d;color:#ff9aa3}body.dark .order-status-badge[data-status="pending_payment"]{background:#49391e;color:#ffd080}
+@media(max-width:1000px){.order-status-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:680px){.order-status-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.order-status-tile{min-height:112px;padding:13px}.order-status-tile strong{font-size:24px}}
 .pos-catalog{padding:14px}.pos-filter-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;align-items:center;margin-bottom:13px}
 .pos-catalog-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px}.pos-catalog-head h2{font-size:16px;margin:0}.pos-active-offers-btn{background:var(--soft);color:var(--ink);padding:8px 11px;font-size:12px}.pos-active-offers-btn:hover{background:var(--computed-bg)}
 .pos-search{position:relative}.pos-search input,.pos-select,.pos-sale input,.pos-sale select,.pos-sale textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--input-bg);color:var(--ink);outline:none}
@@ -46,6 +51,7 @@ main{padding:30px;min-width:0}.top{display:flex;align-items:center;justify-conte
 .pos-product-name{font-size:13px;font-weight:750;line-height:1.25}.pos-product-meta,.pos-product-stock{font-size:11px;color:var(--muted)}.pos-product-price{font-size:14px;font-weight:800;color:var(--ink);margin-top:2px}
 .pos-add-btn{align-self:flex-end;width:32px;height:32px;padding:0;border-radius:50%;background:var(--brand);color:#fff;font-size:21px;line-height:1}.pos-add-btn:disabled{opacity:.45;cursor:not-allowed}
 .pos-sale{padding:16px;position:sticky;top:14px}.pos-sale-header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}.pos-sale-header h2{margin:0;font-size:19px}.pos-sale-actions{display:flex;align-items:center;gap:6px}.pos-cart-head,.pos-cart-row{display:grid;grid-template-columns:minmax(0,1.5fr) 96px 78px 85px 24px;gap:7px;align-items:center}
+.pos-order-toggle{display:flex;align-items:center;gap:8px;margin-top:4px;color:var(--ink);font-size:12px;font-weight:750}.pos-order-toggle input{width:16px;height:16px;accent-color:var(--brand)}.pos-shipping-field{margin-top:8px}.pos-shipping-field[hidden],.pos-total-line[hidden]{display:none}
 .pos-cart-head{padding:9px 7px;background:var(--table-head);border-radius:9px;color:var(--muted);font-size:10px;font-weight:750;text-transform:uppercase}
 .pos-cart-list{max-height:250px;overflow:auto}.pos-cart-row{padding:10px 4px;border-bottom:1px solid var(--line);font-size:12px}.pos-cart-product{display:flex;align-items:center;gap:7px;min-width:0}.pos-cart-thumb{width:38px;height:42px;flex:0 0 38px;border-radius:7px;object-fit:cover;background:var(--soft)}.pos-cart-thumb-placeholder{display:grid;place-items:center;color:var(--brand);font-size:16px}.pos-cart-name{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pos-cart-sub{font-size:10px;color:var(--muted);margin-top:2px}
 .pos-qty{display:flex;align-items:center;justify-content:center;gap:2px}.pos-qty button{width:25px;height:27px;padding:0;border-radius:6px;background:var(--soft);color:var(--ink)}.pos-qty span{min-width:18px;text-align:center}.pos-cart-money{text-align:right;font-variant-numeric:tabular-nums}.pos-cart-remove{width:25px;height:28px;padding:0;background:transparent;color:var(--red);font-size:17px}
@@ -144,7 +150,7 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
     <button data-page="pedidos"><span class="ico">▤</span> Pedidos</button>
     <button data-page="reportes"><span class="ico">▥</span> Reportes</button>
   </nav>
-  <div class="sidebar-foot"><button id="settingsBtn" class="theme-toggle" type="button">⚙ <span>Ajustes</span></button><button id="themeToggle" class="theme-toggle" type="button" aria-label="Activar modo oscuro" title="Cambiar tema">☾ <span>Modo oscuro</span></button><button id="versionNotesBtn" class="theme-toggle" type="button">ⓘ <span>Notas de la versión</span></button><div style="margin-top:12px">Versión 2.17 · Datos guardados en esta computadora y navegador.</div></div>
+  <div class="sidebar-foot"><button id="settingsBtn" class="theme-toggle" type="button">⚙ <span>Ajustes</span></button><button id="themeToggle" class="theme-toggle" type="button" aria-label="Activar modo oscuro" title="Cambiar tema">☾ <span>Modo oscuro</span></button><button id="versionNotesBtn" class="theme-toggle" type="button">ⓘ <span>Notas de la versión</span></button><div style="margin-top:12px">Versión 2.18 · Datos guardados en esta computadora y navegador.</div></div>
 </aside>
 <main>
   <section id="page-inventario" class="page active">
@@ -181,7 +187,6 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
     </section>
     <section class="pos-sale" aria-label="Venta actual">
      <div class="pos-sale-header"><h2>Venta actual</h2><div class="pos-sale-actions"><button type="button" class="btn-light btn-small" id="addExtraProductBtn">＋ Venta extra</button><button type="button" class="btn-light btn-small" id="clearSaleBtn">▤ Limpiar venta</button></div></div>
-     <label class="pos-stock-toggle" style="width:max-content;margin:0 0 10px"><input id="posOrderToggle" type="checkbox"> Pedido</label>
      <div class="pos-cart-head"><span>Producto</span><span style="text-align:center">Cantidad</span><span style="text-align:right">Precio</span><span style="text-align:right">Subtotal</span><span></span></div>
      <div class="hint" style="padding:5px 7px">Puedes pulsar el precio de una línea para cambiarlo solo en esta venta.</div>
      <div class="pos-extra-help">Las ventas extra no se agregan al inventario.</div>
@@ -191,6 +196,9 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
       <div class="pos-total-line"><span>Subtotal</span><strong id="posSubtotal">Q0.00</strong></div>
       <div class="pos-total-line" id="posItemDiscountRow" style="display:none"><span>Descuentos por producto</span><strong id="posItemDiscountApplied">−Q0.00</strong></div>
       <div class="pos-total-line"><span>Descuento general</span><div class="pos-discount-controls"><select id="posDiscountType" aria-label="Tipo de descuento general"><option value="amount">Q</option><option value="percent">%</option></select><input id="posDiscount" type="number" min="0" step="0.01" value="0" aria-label="Descuento general"></div><strong id="posDiscountApplied">−Q0.00</strong></div><small id="posDiscountHint" class="pos-discount-hint" aria-live="polite"></small>
+      <label class="pos-order-toggle"><input id="posOrderToggle" type="checkbox"><span>Pedido</span></label>
+      <div class="field pos-shipping-field" id="posShippingField" hidden><label for="posShippingFee">Costo de envío (Q)</label><input id="posShippingFee" type="number" min="0" step="0.01" value="0"></div>
+      <div class="pos-total-line" id="posShippingRow" hidden><span>Costo de envío</span><strong id="posShippingAmount">Q0.00</strong></div>
       <div class="pos-total-line" id="posRoundingRow" style="display:none"><span>Ajuste de redondeo</span><strong id="posRoundingAdjustment">Q0.00</strong></div>
       <div class="pos-total-line pos-grand-total"><span>Total</span><strong id="posTotal">Q0.00</strong></div>
      </div>
@@ -206,7 +214,7 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
     </section>
    </div>
   </section>
-  <section id="page-pedidos" class="page"><div class="top"><div><div class="eyebrow">OPERACIONES</div><h1>Pedidos</h1><p class="subtitle">Consulta las ventas registradas como pedido.</p></div></div><div class="panel"><div class="panel-head"><div><h2>Pedidos registrados</h2><p id="ordersCount">0 pedidos</p></div></div><div class="tablewrap"><table><thead><tr><th>Fecha</th><th>Número</th><th>Productos</th><th>Método de pago</th><th>Total</th></tr></thead><tbody id="orderRows"></tbody></table></div><div id="ordersEmpty" class="empty"><strong>Aún no hay pedidos</strong>Marca “Pedido” en la venta actual para que aparezca aquí.</div></div></section>
+  <section id="page-pedidos" class="page"><div class="top"><div><div class="eyebrow">OPERACIONES</div><h1>Pedidos</h1><p class="subtitle">Organiza y consulta cada pedido por su estado.</p></div><button type="button" class="btn-light" id="orderShippingOptions">⚙ Opciones de envío</button></div><div id="ordersDashboard" class="order-status-grid"></div><div id="ordersListView" hidden><div class="panel"><div class="panel-head"><div><h2 id="ordersListTitle">Pedidos</h2><p id="ordersCount">0 pedidos</p></div><button type="button" class="btn-light" id="ordersBackBtn">← Volver a estados</button></div><div class="tablewrap"><table><thead><tr><th>Fecha</th><th>Número</th><th>Cliente</th><th>Teléfono</th><th>Estado</th><th>Total</th><th></th></tr></thead><tbody id="orderRows"></tbody></table></div><div id="ordersEmpty" class="empty"><strong>No hay pedidos en esta lista</strong>Los nuevos pedidos aparecerán aquí al registrarlos desde el punto de venta.</div></div></div></section>
   <section id="page-reportes" class="page"><div class="top"><div><div class="eyebrow">RESUMEN DEL NEGOCIO</div><h1>Reportes</h1><p class="subtitle">Los reportes de ventas se habilitarán cuando construyamos el punto de venta.</p></div></div><div class="panel"><div class="coming"><div class="big">▥</div><h2>Reportes en preparación</h2><p>Más adelante aquí podrás consultar ventas, ganancia realizada, productos más vendidos y movimientos de inventario.</p></div></div></section>
 </main>
 </div>
@@ -302,8 +310,8 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
 </div>
 <div class="overlay" id="versionNotesOverlay" role="dialog" aria-modal="true" aria-labelledby="versionNotesTitle" style="z-index:20">
  <div class="modal" style="width:min(500px,100%)">
-  <div class="modal-head"><div><h2 id="versionNotesTitle">Notas de la versión 2.17</h2><p>Avance actual del proyecto</p></div><button class="x" id="closeVersionNotes" aria-label="Cerrar notas de la versión">×</button></div>
-  <div class="form"><p style="margin:0;color:var(--ink)">Se agregó la sección Pedidos para consultar las operaciones marcadas como pedido desde el punto de venta.</p></div>
+  <div class="modal-head"><div><h2 id="versionNotesTitle">Notas de la versión 2.18</h2><p>Avance actual del proyecto</p></div><button class="x" id="closeVersionNotes" aria-label="Cerrar notas de la versión">×</button></div>
+  <div class="form"><p style="margin:0;color:var(--ink)">Pedidos ahora organiza las órdenes por estado, permite registrar los datos de entrega y administra canales de origen. El envío forma parte del total y se desglosa en el cierre de caja.</p></div>
   <div class="modal-actions"><span></span><button type="button" class="btn-light" id="doneVersionNotes">Cerrar</button></div>
  </div>
 </div>
@@ -358,7 +366,33 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
 <div class="overlay" id="cashClosingOverlay" role="dialog" aria-modal="true" aria-labelledby="cashClosingTitle" style="z-index:50">
  <div class="modal" style="width:min(520px,100%)">
   <div class="modal-head"><div><h2 id="cashClosingTitle">Cierre de caja</h2><p id="cashClosingDate"></p></div><button class="x" id="closeCashClosing" aria-label="Cerrar cierre de caja">×</button></div>
-  <form id="cashClosingForm"><div class="form"><div class="sale-receipt-totals"><div class="sale-receipt-line"><span>Efectivo de apertura</span><strong id="cashClosingOpening">Q0.00</strong></div><strong class="cash-closing-section-title">Ventas por método de pago</strong><div id="cashClosingPayments" class="cash-closing-method-rows"></div><div class="sale-receipt-line"><span>Total de ventas</span><strong id="cashClosingSalesTotal">Q0.00</strong></div><strong class="cash-closing-section-title">Gastos por método de pago</strong><div id="cashClosingExpenses" class="cash-closing-method-rows"></div><div class="sale-receipt-line"><span>Total de gastos</span><strong id="cashClosingExpensesTotal">Q0.00</strong></div><div class="sale-receipt-line total"><span>Efectivo esperado</span><strong id="cashClosingExpected">Q0.00</strong></div></div><p class="hint" style="margin:8px 0 0">El efectivo esperado solo considera apertura, ventas en efectivo y gastos pagados en efectivo.</p><div class="field" style="margin-top:16px"><label for="cashClosingCounted">Efectivo contado en caja (Q)</label><input id="cashClosingCounted" type="number" min="0" step="0.01" required></div><div class="computed"><span>Diferencia de caja</span><strong id="cashClosingDifference">Q0.00</strong></div></div><div class="modal-actions"><button type="button" class="btn-light" id="cancelCashClosing">Cancelar</button><button type="submit" class="btn-primary">Confirmar cierre</button></div></form>
+  <form id="cashClosingForm"><div class="form"><div class="sale-receipt-totals"><div class="sale-receipt-line"><span>Efectivo de apertura</span><strong id="cashClosingOpening">Q0.00</strong></div><strong class="cash-closing-section-title">Ventas por método de pago</strong><div id="cashClosingPayments" class="cash-closing-method-rows"></div><div class="sale-receipt-line"><span>Total de ventas</span><strong id="cashClosingSalesTotal">Q0.00</strong></div><div class="sale-receipt-line"><span>Pedidos incluidos</span><strong id="cashClosingOrderCount">0 · Q0.00</strong></div><div class="sale-receipt-line"><span>Costo de envío de pedidos</span><strong id="cashClosingShippingTotal">Q0.00</strong></div><strong class="cash-closing-section-title">Gastos por método de pago</strong><div id="cashClosingExpenses" class="cash-closing-method-rows"></div><div class="sale-receipt-line"><span>Total de gastos</span><strong id="cashClosingExpensesTotal">Q0.00</strong></div><div class="sale-receipt-line total"><span>Efectivo esperado</span><strong id="cashClosingExpected">Q0.00</strong></div></div><p class="hint" style="margin:8px 0 0">Los pedidos y envíos se muestran por separado, y ya están incluidos en las ventas por método de pago. El efectivo esperado solo considera apertura, ventas en efectivo y gastos pagados en efectivo.</p><div class="field" style="margin-top:16px"><label for="cashClosingCounted">Efectivo contado en caja (Q)</label><input id="cashClosingCounted" type="number" min="0" step="0.01" required></div><div class="computed"><span>Diferencia de caja</span><strong id="cashClosingDifference">Q0.00</strong></div></div><div class="modal-actions"><button type="button" class="btn-light" id="cancelCashClosing">Cancelar</button><button type="submit" class="btn-primary">Confirmar cierre</button></div></form>
+ </div>
+</div>
+<div class="overlay" id="orderChannelsOverlay" role="dialog" aria-modal="true" aria-labelledby="orderChannelsTitle" style="z-index:55">
+ <div class="modal" style="width:min(500px,100%)">
+  <div class="modal-head"><div><h2 id="orderChannelsTitle">Opciones de envío</h2><p>Administra los canales por donde recibes pedidos.</p></div><button class="x" id="closeOrderChannels" aria-label="Cerrar opciones de envío">×</button></div>
+  <div class="form"><div class="field"><label for="newOrderChannel">Agregar canal de origen</label><div style="display:flex;gap:8px"><input id="newOrderChannel" maxlength="50" placeholder="Ej. Facebook" style="flex:1"><button type="button" class="btn-primary" id="addOrderChannelBtn">＋ Agregar</button></div></div><div id="orderChannelsList" class="order-channel-list" style="margin-top:16px"></div></div>
+  <div class="modal-actions"><span></span><button type="button" class="btn-light" id="doneOrderChannels">Cerrar</button></div>
+ </div>
+</div>
+<div class="overlay" id="orderDetailOverlay" role="dialog" aria-modal="true" aria-labelledby="orderDetailTitle" style="z-index:56">
+ <div class="modal" style="width:min(760px,100%)">
+  <div class="modal-head"><div><h2 id="orderDetailTitle">Detalle del pedido</h2><p id="orderDetailSubtitle"></p></div><button class="x" id="closeOrderDetail" aria-label="Cerrar detalle del pedido">×</button></div>
+  <form id="orderDetailForm"><div class="form"><input id="orderDetailSaleId" type="hidden"><div class="grid">
+   <div class="field"><label for="orderDetailNumber">Número de pedido *</label><input id="orderDetailNumber" required maxlength="30"></div>
+   <div class="field"><label for="orderDetailDate">Fecha del pedido *</label><input id="orderDetailDate" type="date" required></div>
+   <div class="field"><label for="orderDetailChannel">Canal de origen *</label><select id="orderDetailChannel" required></select></div>
+   <div class="field"><label for="orderDetailStatus">Estado del pedido</label><select id="orderDetailStatus"><option value="new">Nuevo</option><option value="pending_payment">Pendiente de pago</option><option value="packaging">En empaquetado</option><option value="shipped">Enviado</option><option value="delivered">Entregado</option><option value="cancelled">Cancelado</option></select></div>
+   <div class="field"><label for="orderDetailCustomer">Nombre del cliente *</label><input id="orderDetailCustomer" maxlength="100" required></div>
+   <div class="field"><label for="orderDetailPhone1">Teléfono 1 *</label><input id="orderDetailPhone1" type="tel" maxlength="30" required></div>
+   <div class="field"><label for="orderDetailPhone2">Teléfono 2 (opcional)</label><input id="orderDetailPhone2" type="tel" maxlength="30"></div>
+   <div class="field"><label for="orderDetailShipping">Costo de envío</label><input id="orderDetailShipping" type="text" readonly></div>
+   <div class="field full"><label>Productos vendidos</label><div id="orderDetailItems" class="order-detail-readonly"></div></div>
+   <div class="field full"><label>Método de pago</label><div id="orderDetailPayment" class="order-detail-readonly"></div></div>
+   <div class="field full"><label for="orderDetailAddress">Dirección de entrega *</label><textarea id="orderDetailAddress" rows="2" maxlength="400" required></textarea></div>
+   <div class="field full"><label for="orderDetailNotes">Notas adicionales</label><textarea id="orderDetailNotes" rows="2" maxlength="500"></textarea></div>
+  </div><div class="computed"><span>Total del pedido</span><strong id="orderDetailTotal">Q0.00</strong></div><p class="hint" style="margin-bottom:0">Los productos, cantidades y método de pago se muestran como referencia y no se pueden modificar aquí.</p></div><div class="modal-actions"><button type="button" class="btn-light" id="cancelOrderDetail">Cerrar</button><button type="submit" class="btn-primary">Guardar pedido</button></div></form>
  </div>
 </div>
 <div class="overlay" id="posPriceOverlay" role="dialog" aria-modal="true" aria-labelledby="posPriceTitle" style="z-index:35">
@@ -415,11 +449,13 @@ const CASH_REGISTER_KEY='prendaStudioCashRegister_v1';
 const CASH_EXPENSES_KEY='prendaStudioCashExpenses_v1';
 const OFFERS_KEY='prendaStudioOffers_v1';
 const SETTINGS_KEY='prendaStudioSettings_v1';
-let products=[], sales=[], cashSessions=[], cashExpenses=[], posCart=[], offers=[], paymentMethod='Efectivo', posCashTouched=false, financialValuesVisible=true, editingOfferId=null, editingPOSPriceId=null, editingId=null, skuManuallyEdited=false, syncSource=null, currentPhoto='', cameraStream=null, cameraRequestId=0, quickOptionKind='category', currentBarcodeSvg='', currentBarcodeSku='', barcodePreviewUrl='', scanStream=null, scanRequestId=0, scanActive=false, scanDetector=null, scanFrame=0, scanCanvas=null, scanLastAttempt=0, scanAction='inventory', closingCashSessionId=null, cashOpeningMode='new', cashReopenSourceId=null;
+const ORDER_CHANNELS_KEY='prendaStudioOrderChannels_v1', ORDER_COUNTER_KEY='prendaStudioOrderCounter_v1';
+let products=[], sales=[], cashSessions=[], cashExpenses=[], posCart=[], offers=[], orderChannels=['Instagram','WhatsApp'], orderListFilter=null, editingOrderId=null, paymentMethod='Efectivo', posCashTouched=false, financialValuesVisible=true, editingOfferId=null, editingPOSPriceId=null, editingId=null, skuManuallyEdited=false, syncSource=null, currentPhoto='', cameraStream=null, cameraRequestId=0, quickOptionKind='category', currentBarcodeSvg='', currentBarcodeSku='', barcodePreviewUrl='', scanStream=null, scanRequestId=0, scanActive=false, scanDetector=null, scanFrame=0, scanCanvas=null, scanLastAttempt=0, scanAction='inventory', closingCashSessionId=null, cashOpeningMode='new', cashReopenSourceId=null;
 const CAT_KEY='prendaStudioCategories_v1', COLOR_KEY='prendaStudioColors_v1';
 let categories=['Camisetas','Pantalones','Vestidos','Accesorios','Calzado'], colors=['N/A','Negro','Blanco','Azul','Rojo','Verde','Gris','Beige','Rosado'];
 try{products=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');if(!Array.isArray(products))products=[]}catch(e){products=[]}
 try{sales=JSON.parse(localStorage.getItem(SALES_KEY)||'[]');if(!Array.isArray(sales))sales=[]}catch(e){sales=[]}
+try{const saved=JSON.parse(localStorage.getItem(ORDER_CHANNELS_KEY)||'null');if(Array.isArray(saved))orderChannels=saved.filter(channel=>typeof channel==='string'&&channel.trim()).map(channel=>channel.trim())}catch(e){}
 try{cashSessions=JSON.parse(localStorage.getItem(CASH_REGISTER_KEY)||'[]');if(!Array.isArray(cashSessions))cashSessions=[]}catch(e){cashSessions=[]}
 try{cashExpenses=JSON.parse(localStorage.getItem(CASH_EXPENSES_KEY)||'[]');if(!Array.isArray(cashExpenses))cashExpenses=[]}catch(e){cashExpenses=[]}
 try{offers=JSON.parse(localStorage.getItem(OFFERS_KEY)||'[]');if(!Array.isArray(offers))offers=[]}catch(e){offers=[]}
@@ -429,6 +465,20 @@ let storeSettings={name:'Prenda Studio',logo:'✦',tagline:'Inventario & ventas'
 try{const saved=JSON.parse(localStorage.getItem(SETTINGS_KEY)||'null');if(saved&&typeof saved==='object')storeSettings={...storeSettings,...saved}}catch(e){}
 if(!colors.includes('N/A'))colors.unshift('N/A');
 const money=n=>'Q'+Number(n||0).toLocaleString('es-GT',{minimumFractionDigits:2,maximumFractionDigits:2});
+const ORDER_STATUSES=[{id:'new',label:'Pedidos nuevos',short:'Nuevo'},{id:'pending_payment',label:'Pedidos pendientes de pago',short:'Pendiente de pago'},{id:'packaging',label:'Pedidos en empaquetado',short:'En empaquetado'},{id:'shipped',label:'Pedidos enviados',short:'Enviado'},{id:'delivered',label:'Pedidos entregados',short:'Entregado'},{id:'cancelled',label:'Pedidos cancelados',short:'Cancelado'},{id:'all',label:'Todos los pedidos',short:'Todos'}];
+function orderNumberSequence(value){const match=String(value||'').match(/^PED-(\d+)$/i);return match?Number(match[1]):0}
+function orderCounterValue(){try{return Math.max(0,Number(localStorage.getItem(ORDER_COUNTER_KEY)||0)||0)}catch(e){return 0}}
+function normalizeOrderRecords(){
+ const orders=sales.filter(sale=>sale.isOrder);if(!orders.length)return;
+ let sequence=Math.max(orderCounterValue(),...orders.map(order=>orderNumberSequence(order.orderNumber)));let changed=false;
+ orders.filter(order=>!order.orderNumber).sort((a,b)=>String(a.createdAt||'').localeCompare(String(b.createdAt||''))).forEach(order=>{order.orderNumber='PED-'+(++sequence);changed=true});
+ orders.forEach(order=>{if(!ORDER_STATUSES.some(status=>status.id===order.orderStatus)){order.orderStatus='new';changed=true}if(!order.orderDate){order.orderDate=localDateValue(new Date(order.createdAt||Date.now()));changed=true}if(order.shippingFee==null){order.shippingFee=0;changed=true}});
+ try{if(Number(localStorage.getItem(ORDER_COUNTER_KEY)||0)!==sequence)localStorage.setItem(ORDER_COUNTER_KEY,String(sequence));if(changed)localStorage.setItem(SALES_KEY,JSON.stringify(sales))}catch(e){}
+}
+normalizeOrderRecords();
+function nextOrderNumber(){const current=Math.max(orderCounterValue(),0,...sales.filter(sale=>sale.isOrder).map(sale=>orderNumberSequence(sale.orderNumber)));return 'PED-'+(current+1)}
+function saveSales(){try{localStorage.setItem(SALES_KEY,JSON.stringify(sales));return true}catch(e){toast('No se pudieron guardar los pedidos en este navegador.');return false}}
+function orderStatusLabel(value){return (ORDER_STATUSES.find(status=>status.id===value)||ORDER_STATUSES[0]).short}
 const CODE128_PATTERNS=[
  '11011001100','11001101100','11001100110','10010011000','10010001100','10001001100','10011001000','10011000100','10001100100','11001001000',
  '11001000100','11000100100','10110011100','10011011100','10011001110','10111001100','10011101100','10011100110','11001110010','11001011100',
@@ -593,13 +643,13 @@ function getPOSTotals(){
  const subtotal=roundMoney(posCart.reduce((sum,entry)=>sum+Number(entry.unitPrice||0)*entry.quantity,0));
  const itemDiscount=roundMoney(posCart.reduce((sum,entry)=>sum+cartEntryDiscount(entry),0)),discountBase=Math.max(0,subtotal-itemDiscount),type=$('posDiscountType').value,entered=Number($('posDiscount').value||0);
  const discount=roundMoney(Math.min(discountBase,Math.max(0,type==='percent'?discountBase*entered/100:entered)));
- const unroundedTotal=Math.max(0,discountBase-discount),total=type==='percent'?roundPOSWhole(unroundedTotal):roundMoney(unroundedTotal);
- const roundingAdjustment=roundMoney(total-unroundedTotal);
- return {subtotal,itemDiscount,discount,total,roundingAdjustment};
+ const unroundedTotal=Math.max(0,discountBase-discount),roundedProductsTotal=type==='percent'?roundPOSWhole(unroundedTotal):roundMoney(unroundedTotal),roundingAdjustment=roundMoney(roundedProductsTotal-unroundedTotal),shippingFee=$('posOrderToggle').checked?roundMoney(Math.max(0,Number($('posShippingFee').value||0))):0,total=roundMoney(roundedProductsTotal+shippingFee);
+ return {subtotal,itemDiscount,discount,total,roundingAdjustment,shippingFee};
 }
 function updatePOSTotals(){
  $('posDiscount').step='0.01';
- const {subtotal,itemDiscount,discount,total,roundingAdjustment}=getPOSTotals();$('posSubtotal').textContent=money(subtotal);$('posItemDiscountApplied').textContent='−'+money(itemDiscount);$('posItemDiscountRow').style.display=itemDiscount>0?'flex':'none';$('posDiscountApplied').textContent='−'+money(discount);$('posTotal').textContent=money(total);
+ const orderActive=$('posOrderToggle').checked; $('posShippingField').hidden=!orderActive;$('posShippingFee').disabled=!orderActive;$('posShippingRow').hidden=!orderActive;
+ const {subtotal,itemDiscount,discount,total,roundingAdjustment,shippingFee}=getPOSTotals();$('posSubtotal').textContent=money(subtotal);$('posItemDiscountApplied').textContent='−'+money(itemDiscount);$('posItemDiscountRow').style.display=itemDiscount>0?'flex':'none';$('posDiscountApplied').textContent='−'+money(discount);$('posShippingAmount').textContent=money(shippingFee);$('posTotal').textContent=money(total);
  const percentMode=$('posDiscountType').value==='percent';$('posRoundingRow').style.display=percentMode?'flex':'none';$('posRoundingAdjustment').textContent=(roundingAdjustment<0?'−':'+')+money(Math.abs(roundingAdjustment));
  $('posDiscountHint').textContent=percentMode?'Se redondea el total final al quetzal entero más cercano.':'';
  const cashDetails=$('posCashDetails');cashDetails.style.display=paymentMethod==='Efectivo'?'grid':'none';
@@ -615,6 +665,7 @@ function getTodayCashSessions(){const today=localDateValue();return cashSessions
 function getOpenCashSession(){return cashSessions.find(session=>!session.closedAt)||null}
 function cashRegisterCanSell(){const session=getOpenCashSession();return Boolean(session&&session.date===localDateValue()&&!session.closedAt)}
 function cashSessionSalesTotal(sessionId){return roundMoney(sales.reduce((sum,sale)=>sum+(sale.cashSessionId===sessionId&&sale.paymentMethodType==='Efectivo'?Number(sale.total||0):0),0))}
+function cashSessionOrderSummary(sessionId){const orders=sales.filter(sale=>sale.cashSessionId===sessionId&&sale.isOrder);return {count:orders.length,total:roundMoney(orders.reduce((sum,order)=>sum+Number(order.total||0),0)),shipping:roundMoney(orders.reduce((sum,order)=>sum+Number(order.shippingFee||0),0))}}
 function cashSessionExpensesTotal(sessionId,method=''){return roundMoney(cashExpenses.reduce((sum,expense)=>sum+(expense.cashSessionId===sessionId&&(!method||expense.paymentMethod===method)?Number(expense.amount||0):0),0))}
 const CASH_PAYMENT_METHODS=['Efectivo','Tarjeta','Transferencia','Otro'];
 function cashSessionSalesByMethod(sessionId){const totals=Object.fromEntries(CASH_PAYMENT_METHODS.map(method=>[method,0]));sales.filter(sale=>sale.cashSessionId===sessionId).forEach(sale=>{const method=CASH_PAYMENT_METHODS.includes(sale.paymentMethodType)?sale.paymentMethodType:CASH_PAYMENT_METHODS.includes(sale.paymentMethod)?sale.paymentMethod:'Otro';totals[method]+=Number(sale.total||0)});CASH_PAYMENT_METHODS.forEach(method=>totals[method]=roundMoney(totals[method]));return totals}
@@ -623,6 +674,7 @@ function renderCashClosingBreakdown(sessionId){
  const salesByMethod=cashSessionSalesByMethod(sessionId),expensesByMethod=cashSessionExpensesByMethod(sessionId),salesHost=$('cashClosingPayments'),expensesHost=$('cashClosingExpenses');salesHost.replaceChildren();expensesHost.replaceChildren();
  const addRows=(host,totals,negative=false)=>CASH_PAYMENT_METHODS.forEach(method=>{const line=document.createElement('div');line.className='sale-receipt-line';const label=document.createElement('span');label.textContent=method;const amount=document.createElement('strong');amount.textContent=(negative&&totals[method]>0?'−':'')+money(totals[method]);line.append(label,amount);host.appendChild(line)});
  addRows(salesHost,salesByMethod);addRows(expensesHost,expensesByMethod,true);
+ const orders=cashSessionOrderSummary(sessionId);$('cashClosingOrderCount').textContent=orders.count+' · '+money(orders.total);$('cashClosingShippingTotal').textContent=money(orders.shipping);
  $('cashClosingSalesTotal').textContent=money(roundMoney(Object.values(salesByMethod).reduce((sum,value)=>sum+value,0)));$('cashClosingExpensesTotal').textContent='−'+money(roundMoney(Object.values(expensesByMethod).reduce((sum,value)=>sum+value,0)));
 }
 function cashSessionExpected(session){return roundMoney(Number(session.openingAmount||0)+cashSessionSalesTotal(session.id)-cashSessionExpensesTotal(session.id,'Efectivo'))}
@@ -700,7 +752,7 @@ function saveCashClosing(event){
  event.preventDefault();const session=cashSessions.find(item=>item.id===closingCashSessionId),counted=Number($('cashClosingCounted').value);if(!session||session.closedAt){toast('La caja ya no está abierta.');return}
  if(posCart.length){toast('Limpia o registra la venta actual antes de cerrar.');return}
  if(!Number.isFinite(counted)||counted<0){toast('Ingresa el efectivo contado en caja.');$('cashClosingCounted').focus();return}
- const expected=cashSessionExpected(session),previous=cashSessions;cashSessions=cashSessions.map(item=>item.id===session.id?{...item,closedAt:new Date().toISOString(),cashSales:cashSessionSalesTotal(session.id),salesByMethod:cashSessionSalesByMethod(session.id),expenseTotal:cashSessionExpensesTotal(session.id),expensesByMethod:cashSessionExpensesByMethod(session.id),cashExpenseTotal:cashSessionExpensesTotal(session.id,'Efectivo'),expectedCash:expected,countedCash:roundMoney(counted),difference:roundMoney(counted-expected)}:item);
+ const expected=cashSessionExpected(session),orderSummary=cashSessionOrderSummary(session.id),previous=cashSessions;cashSessions=cashSessions.map(item=>item.id===session.id?{...item,closedAt:new Date().toISOString(),cashSales:cashSessionSalesTotal(session.id),salesByMethod:cashSessionSalesByMethod(session.id),expenseTotal:cashSessionExpensesTotal(session.id),expensesByMethod:cashSessionExpensesByMethod(session.id),orderCount:orderSummary.count,orderTotal:orderSummary.total,orderShipping:orderSummary.shipping,cashExpenseTotal:cashSessionExpensesTotal(session.id,'Efectivo'),expectedCash:expected,countedCash:roundMoney(counted),difference:roundMoney(counted-expected)}:item);
  if(!saveCashSessions()){cashSessions=previous;return}
  $('cashClosingOverlay').classList.remove('show');closingCashSessionId=null;renderPOS();const difference=roundMoney(counted-expected);toast('Caja cerrada. Diferencia: '+(difference<0?'−':'')+money(Math.abs(difference))+'.');
 }
@@ -793,7 +845,7 @@ function setPOSQuantity(productId,quantity){
  entry.quantity=quantity;renderPOS();
 }
 function removePOSProduct(productId){posCart=posCart.filter(entry=>entry.productId!==productId);renderPOS()}
-function clearPOSSale(){if(posCart.length&&!confirm('¿Limpiar todos los productos de la venta actual?'))return;posCart=[];$('posSaleNotes').value='';$('posDiscount').value='0';$('posOtherMethod').value='';$('posOrderToggle').checked=false;posCashTouched=false;renderPOS()}
+function clearPOSSale(){if(posCart.length&&!confirm('¿Limpiar todos los productos de la venta actual?'))return;posCart=[];$('posSaleNotes').value='';$('posDiscount').value='0';$('posOtherMethod').value='';$('posOrderToggle').checked=false;$('posShippingFee').value='0';posCashTouched=false;renderPOS()}
 function registerPOSSale(){
  if(!ensureCashRegisterOpen())return;
  if(!posCart.length){toast('Agrega al menos un producto a la venta.');return}
@@ -803,8 +855,8 @@ function registerPOSSale(){
  const {subtotal,itemDiscount,discount,total,roundingAdjustment}=getPOSTotals(),received=paymentMethod==='Efectivo'?Number($('posCashReceived').value||0):total;
  if(paymentMethod==='Efectivo'&&received<total){toast('El monto recibido no puede ser menor que el total.');$('posCashReceived').focus();return}
  const isOrder=$('posOrderToggle').checked;
- if(isOrder&&!confirm('Esta operación se guardará como un pedido y aparecerá en la sección “Pedidos”. ¿Deseas continuar? Si eliges Cancelar, no se registrará y se desmarcará la opción Pedido.')){$('posOrderToggle').checked=false;return}
- const itemProfit=saleItems.reduce((sum,item)=>sum+item.profit,0),cashSession=getOpenCashSession(),now=new Date(),sale={id:'V-'+now.getTime().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase(),cashSessionId:cashSession.id,createdAt:now.toISOString(),isOrder,items:saleItems,subtotal,itemDiscount,discount,roundingAdjustment,discountType:$('posDiscountType').value,discountValue:Number($('posDiscount').value||0),total,profit:roundMoney(itemProfit-discount+roundingAdjustment),paymentMethod:paymentMethod==='Otro'?$('posOtherMethod').value.trim():paymentMethod,paymentMethodType:paymentMethod,amountReceived:roundMoney(received),change:roundMoney(Math.max(0,received-total)),notes:$('posSaleNotes').value.trim()};
+ if(isOrder&&!confirm('Esta operación se guardará como pedido y aparecerá en “Pedidos nuevos”. ¿Deseas continuar? Si eliges Cancelar, no se registrará y se desmarcará la casilla Pedido.')){$('posOrderToggle').checked=false;updatePOSTotals();return}
+ const itemProfit=saleItems.reduce((sum,item)=>sum+item.profit,0),cashSession=getOpenCashSession(),now=new Date(),sale={id:'V-'+now.getTime().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase(),cashSessionId:cashSession.id,createdAt:now.toISOString(),isOrder,orderNumber:isOrder?nextOrderNumber():'',orderStatus:isOrder?'new':'',orderDate:isOrder?localDateValue(now):'',orderChannel:'',orderCustomer:'',orderPhone1:'',orderPhone2:'',orderAddress:'',orderNotes:'',shippingFee:isOrder?roundMoney(Math.max(0,Number($('posShippingFee').value||0))):0,items:saleItems,subtotal,itemDiscount,discount,roundingAdjustment,discountType:$('posDiscountType').value,discountValue:Number($('posDiscount').value||0),total,profit:roundMoney(itemProfit-discount+roundingAdjustment),paymentMethod:paymentMethod==='Otro'?$('posOtherMethod').value.trim():paymentMethod,paymentMethodType:paymentMethod,amountReceived:roundMoney(received),change:roundMoney(Math.max(0,received-total)),notes:$('posSaleNotes').value.trim()};
  const oldSales=localStorage.getItem(SALES_KEY),nextSales=[sale,...sales],previousProducts=products;
  try{localStorage.setItem(SALES_KEY,JSON.stringify(nextSales))}catch(e){toast('No se pudo guardar la venta. Libera espacio del navegador e inténtalo de nuevo.');return}
  products=products.map(product=>{const item=posCart.find(entry=>!entry.custom&&entry.productId===product.id);return item?{...product,qty:Number(product.qty||0)-item.quantity}:product});
@@ -812,26 +864,62 @@ function registerPOSSale(){
   products=previousProducts;try{if(oldSales===null)localStorage.removeItem(SALES_KEY);else localStorage.setItem(SALES_KEY,oldSales)}catch(e){}
   renderPOS();return;
  }
- sales=nextSales;posCart=[];$('posSaleNotes').value='';$('posDiscount').value='0';$('posOtherMethod').value='';$('posOrderToggle').checked=false;posCashTouched=false;render();showSaleSuccess(sale);
+ sales=nextSales;if(isOrder){try{localStorage.setItem(ORDER_COUNTER_KEY,String(orderNumberSequence(sale.orderNumber)))}catch(e){}}posCart=[];$('posSaleNotes').value='';$('posDiscount').value='0';$('posOtherMethod').value='';$('posOrderToggle').checked=false;$('posShippingFee').value='0';posCashTouched=false;render();showSaleSuccess(sale);
 }
 function renderOrders(){
- const orders=sales.filter(sale=>sale.isOrder),rows=$('orderRows'),empty=$('ordersEmpty');rows.replaceChildren();
- $('ordersCount').textContent=orders.length+' '+(orders.length===1?'pedido':'pedidos');empty.style.display=orders.length?'none':'block';
- orders.forEach(order=>{
-  const row=document.createElement('tr'),date=document.createElement('td'),number=document.createElement('td'),items=document.createElement('td'),payment=document.createElement('td'),total=document.createElement('td');
-  date.textContent=new Intl.DateTimeFormat('es-GT',{dateStyle:'medium',timeStyle:'short'}).format(new Date(order.createdAt));number.textContent=order.id;
-  items.textContent=(order.items||[]).map(item=>item.name+' × '+item.quantity).join(', ');payment.textContent=order.paymentMethod||order.paymentMethodType||'—';total.className='money';total.textContent=money(order.total);
-  row.append(date,number,items,payment,total);rows.appendChild(row)
+ const dashboard=$('ordersDashboard'),list=$('ordersListView');dashboard.replaceChildren();
+ const orderSales=sales.filter(sale=>sale.isOrder);
+ ORDER_STATUSES.forEach(status=>{const count=status.id==='all'?orderSales.length:orderSales.filter(order=>(order.orderStatus||'new')===status.id).length,tile=document.createElement('button');tile.type='button';tile.className='order-status-tile';const label=document.createElement('span');label.textContent=status.label;const amount=document.createElement('strong');amount.textContent=count;const action=document.createElement('small');action.textContent='Ver pedidos →';tile.append(label,amount,action);tile.onclick=()=>openOrdersList(status.id);dashboard.appendChild(tile)});
+ dashboard.hidden=orderListFilter!==null;list.hidden=orderListFilter===null;if(orderListFilter===null)return;
+ const selected=ORDER_STATUSES.find(status=>status.id===orderListFilter)||ORDER_STATUSES[ORDER_STATUSES.length-1],orders=orderSales.filter(order=>orderListFilter==='all'||(order.orderStatus||'new')===orderListFilter),rows=$('orderRows'),empty=$('ordersEmpty');rows.replaceChildren();
+ $('ordersListTitle').textContent=selected.label;$('ordersCount').textContent=orders.length+' '+(orders.length===1?'pedido':'pedidos');empty.style.display=orders.length?'none':'block';
+ orders.sort((a,b)=>String(b.orderDate||b.createdAt).localeCompare(String(a.orderDate||a.createdAt))).forEach(order=>{
+  const row=document.createElement('tr'),date=document.createElement('td'),number=document.createElement('td'),customer=document.createElement('td'),phone=document.createElement('td'),state=document.createElement('td'),total=document.createElement('td'),action=document.createElement('td');
+  date.textContent=order.orderDate?new Intl.DateTimeFormat('es-GT',{dateStyle:'medium'}).format(new Date(order.orderDate+'T12:00:00')):'—';number.textContent=order.orderNumber||order.id;customer.textContent=order.orderCustomer||'Pendiente de completar';phone.textContent=order.orderPhone1||'—';
+  const badge=document.createElement('span');badge.className='order-status-badge';badge.dataset.status=order.orderStatus||'new';badge.textContent=orderStatusLabel(order.orderStatus||'new');state.appendChild(badge);total.className='money';total.textContent=money(order.total);
+  const edit=document.createElement('button');edit.type='button';edit.className='btn-light btn-small';edit.textContent='Ver / editar';edit.onclick=()=>openOrderDetails(order.id);action.appendChild(edit);row.append(date,number,customer,phone,state,total,action);rows.appendChild(row)
  });
 }
+function openOrdersList(status){orderListFilter=status;renderOrders()}
+function backToOrderStatuses(){orderListFilter=null;renderOrders()}
+function populateOrderChannelSelect(selected=''){
+ const select=$('orderDetailChannel');select.replaceChildren();const placeholder=document.createElement('option');placeholder.value='';placeholder.textContent='Seleccionar canal';select.appendChild(placeholder);
+ const options=[...orderChannels];if(selected&&!options.includes(selected))options.push(selected);options.forEach(channel=>{const option=document.createElement('option');option.value=channel;option.textContent=channel;select.appendChild(option)});select.value=selected||'';
+}
+function openOrderDetails(saleId){
+ const order=sales.find(sale=>sale.id===saleId&&sale.isOrder);if(!order)return;editingOrderId=order.id;
+ $('orderDetailSaleId').value=order.id;$('orderDetailSubtitle').textContent='Venta '+order.id+' · '+orderStatusLabel(order.orderStatus||'new');$('orderDetailNumber').value=order.orderNumber||'';$('orderDetailDate').value=order.orderDate||localDateValue(new Date(order.createdAt||Date.now()));populateOrderChannelSelect(order.orderChannel||'');$('orderDetailStatus').value=order.orderStatus||'new';$('orderDetailCustomer').value=order.orderCustomer||'';$('orderDetailPhone1').value=order.orderPhone1||'';$('orderDetailPhone2').value=order.orderPhone2||'';$('orderDetailAddress').value=order.orderAddress||'';$('orderDetailNotes').value=order.orderNotes||'';$('orderDetailShipping').value=money(order.shippingFee||0);$('orderDetailTotal').textContent=money(order.total);
+ const itemsHost=$('orderDetailItems');itemsHost.replaceChildren();(order.items||[]).forEach(item=>{const line=document.createElement('div'),name=document.createElement('strong'),details=document.createElement('small');name.textContent=item.name||'Producto';const attributes=[item.sku?'SKU '+item.sku:'',item.category||'',item.color&&item.color!=='N/A'?item.color:''].filter(Boolean).join(' · '),discount=Number(item.discount||0)>0?' · Descuento: −'+money(item.discount):'';details.textContent=(attributes?attributes+' · ':'')+'Cantidad: '+item.quantity+' · Precio unitario: '+money(item.unitPrice)+discount+' · Total de línea: '+money(item.total==null?item.subtotal:item.total);line.append(name,details);itemsHost.appendChild(line)});if(!(order.items||[]).length)itemsHost.textContent='Sin productos registrados';
+ const paymentHost=$('orderDetailPayment'),paymentInfo=['Método: '+(order.paymentMethod||order.paymentMethodType||'Sin método'),'Total registrado: '+money(order.total),'Monto recibido: '+money(order.amountReceived)];if(order.paymentMethodType==='Efectivo')paymentInfo.push('Cambio: '+money(order.change));paymentHost.textContent=paymentInfo.join(' · ');$('orderDetailOverlay').classList.add('show');
+}
+function closeOrderDetails(){$('orderDetailOverlay').classList.remove('show');editingOrderId=null}
+function saveOrderDetails(event){
+ event.preventDefault();const order=sales.find(sale=>sale.id===editingOrderId&&sale.isOrder);if(!order)return;
+ const number=$('orderDetailNumber').value.trim(),date=$('orderDetailDate').value,channel=$('orderDetailChannel').value,customer=$('orderDetailCustomer').value.trim(),phone1=$('orderDetailPhone1').value.trim(),address=$('orderDetailAddress').value.trim();
+ if(!number||!date||!channel||!customer||!phone1||!address){toast('Completa el número, fecha, canal, cliente, teléfono 1 y dirección.');return}
+ if(sales.some(sale=>sale.isOrder&&sale.id!==order.id&&String(sale.orderNumber||'').toLowerCase()===number.toLowerCase())){toast('Ese número de pedido ya está asignado a otro pedido.');$('orderDetailNumber').focus();return}
+ const previous=sales;sales=sales.map(sale=>sale.id===order.id?{...sale,orderNumber:number,orderDate:date,orderChannel:channel,orderStatus:$('orderDetailStatus').value,orderCustomer:customer,orderPhone1:phone1,orderPhone2:$('orderDetailPhone2').value.trim(),orderAddress:address,orderNotes:$('orderDetailNotes').value.trim()}:sale);
+ if(!saveSales()){sales=previous;return}
+ closeOrderDetails();renderOrders();toast('Pedido actualizado.');
+}
+function saveOrderChannels(){try{localStorage.setItem(ORDER_CHANNELS_KEY,JSON.stringify(orderChannels));return true}catch(e){toast('No se pudieron guardar los canales de origen.');return false}}
+function renderOrderChannels(){
+ const host=$('orderChannelsList');host.replaceChildren();if(!orderChannels.length){const empty=document.createElement('div');empty.className='empty';empty.textContent='Aún no hay canales. Agrega uno para poder registrar pedidos.';host.appendChild(empty);return}
+ orderChannels.forEach(channel=>{const row=document.createElement('div');row.className='order-channel-row';const label=document.createElement('strong');label.textContent=channel;const actions=document.createElement('div');actions.style.cssText='display:flex;gap:6px';const edit=document.createElement('button');edit.type='button';edit.className='btn-light btn-small';edit.textContent='Modificar';edit.onclick=()=>{const updated=prompt('Modificar canal de origen:',channel);if(updated===null)return;const next=updated.trim();if(!next){toast('El canal no puede quedar vacío.');return}if(orderChannels.some(value=>value.toLowerCase()===next.toLowerCase()&&value!==channel)){toast('Ese canal ya existe.');return}const previousChannels=orderChannels,previousSales=sales;orderChannels=orderChannels.map(value=>value===channel?next:value);sales=sales.map(sale=>sale.isOrder&&sale.orderChannel===channel?{...sale,orderChannel:next}:sale);if(!saveOrderChannels()){orderChannels=previousChannels;sales=previousSales;return}if(!saveSales()){orderChannels=previousChannels;sales=previousSales;try{localStorage.setItem(ORDER_CHANNELS_KEY,JSON.stringify(previousChannels))}catch(e){}return}renderOrderChannels();toast('Canal modificado.')};const remove=document.createElement('button');remove.type='button';remove.className='btn-danger btn-small';remove.textContent='Eliminar';remove.onclick=()=>{if(!confirm('¿Eliminar el canal «'+channel+'»? Los pedidos anteriores conservarán el canal guardado.'))return;const previous=orderChannels;orderChannels=orderChannels.filter(value=>value!==channel);if(!saveOrderChannels()){orderChannels=previous;return}renderOrderChannels();toast('Canal eliminado.')};actions.append(edit,remove);row.append(label,actions);host.appendChild(row)});
+}
+function addOrderChannel(){
+ const input=$('newOrderChannel'),value=input.value.trim();if(!value){toast('Escribe el nombre del canal.');input.focus();return}if(orderChannels.some(channel=>channel.toLowerCase()===value.toLowerCase())){toast('Ese canal ya existe.');return}
+ const previous=orderChannels;orderChannels=[...orderChannels,value];if(!saveOrderChannels()){orderChannels=previous;return}input.value='';renderOrderChannels();toast('Canal agregado.');
+}
+function openOrderChannelOptions(){renderOrderChannels();$('newOrderChannel').value='';$('orderChannelsOverlay').classList.add('show')}
 function showSaleSuccess(sale){
- $('saleSuccessId').textContent='Comprobante '+sale.id+' · '+new Intl.DateTimeFormat('es-GT',{dateStyle:'medium',timeStyle:'short'}).format(new Date(sale.createdAt));
+ $('saleSuccessId').textContent=(sale.isOrder?'Pedido '+(sale.orderNumber||'')+' · ':'Comprobante ')+sale.id+' · '+new Intl.DateTimeFormat('es-GT',{dateStyle:'medium',timeStyle:'short'}).format(new Date(sale.createdAt));
  const host=$('saleSuccessSummary');host.replaceChildren();const items=document.createElement('div');items.className='sale-receipt-items';
  (sale.items||[]).forEach(item=>{const row=document.createElement('div');row.className='sale-receipt-item';const description=document.createElement('span'),name=document.createElement('strong');name.textContent=item.name;const details=document.createElement('small');details.textContent=item.quantity+' × '+money(item.unitPrice)+(Number(item.discount||0)>0?' · descuento '+(item.discountType==='percent'?item.discountValue+'%':money(item.discountValue)+'/u'):'');description.append(name,details);const total=document.createElement('strong');total.textContent=money(item.total==null?item.subtotal:item.total);row.append(description,total);items.appendChild(row)});
  const totals=document.createElement('div');totals.className='sale-receipt-totals';const addLine=(label,value,extra='')=>{const line=document.createElement('div');line.className='sale-receipt-line'+(extra?' '+extra:'');const left=document.createElement('span');left.textContent=label;const right=document.createElement('strong');right.textContent=value;line.append(left,right);totals.appendChild(line)};
- addLine('Subtotal',money(sale.subtotal));if(Number(sale.itemDiscount||0)>0)addLine('Descuentos por producto','−'+money(sale.itemDiscount));if(Number(sale.discount||0)>0){const label=sale.discountType==='percent'?'Descuento general ('+sale.discountValue+'%)':'Descuento general';addLine(label,'−'+money(sale.discount))}if(Number(sale.roundingAdjustment||0)!==0)addLine('Ajuste de redondeo',(sale.roundingAdjustment<0?'−':'＋')+money(Math.abs(sale.roundingAdjustment)));addLine('Total',money(sale.total),'total');
+ addLine('Subtotal',money(sale.subtotal));if(Number(sale.itemDiscount||0)>0)addLine('Descuentos por producto','−'+money(sale.itemDiscount));if(Number(sale.discount||0)>0){const label=sale.discountType==='percent'?'Descuento general ('+sale.discountValue+'%)':'Descuento general';addLine(label,'−'+money(sale.discount))}if(Number(sale.roundingAdjustment||0)!==0)addLine('Ajuste de redondeo',(sale.roundingAdjustment<0?'−':'＋')+money(Math.abs(sale.roundingAdjustment)));if(Number(sale.shippingFee||0)>0)addLine('Costo de envío',money(sale.shippingFee));addLine('Total',money(sale.total),'total');
  const meta=document.createElement('div');meta.className='sale-receipt-meta';const payment=document.createElement('span');payment.textContent='Método de pago: '+(sale.paymentMethod||sale.paymentMethodType||'—');meta.appendChild(payment);
- if(sale.isOrder){const order=document.createElement('strong');order.textContent='Tipo de operación: Pedido';meta.appendChild(order)}
+ if(sale.isOrder){const order=document.createElement('strong');order.textContent='Tipo de operación: Pedido '+(sale.orderNumber||'')+' · Estado: Nuevo';meta.appendChild(order)}
  if(sale.paymentMethodType==='Efectivo'){const received=document.createElement('span');received.textContent='Monto recibido: '+money(sale.amountReceived);const change=document.createElement('span');change.textContent='Cambio: '+money(sale.change);meta.append(received,change)}
  if(sale.notes){const note=document.createElement('span');note.textContent='Nota: '+sale.notes;meta.appendChild(note)}
  host.append(items,totals,meta);$('saleSuccessOverlay').classList.add('show');
@@ -1223,6 +1311,17 @@ $('cashClosingForm').addEventListener('submit',saveCashClosing);
 $('cashClosingCounted').addEventListener('input',updateCashClosingDifference);
 $('closeCashClosing').addEventListener('click',()=>$('cashClosingOverlay').classList.remove('show'));
 $('cancelCashClosing').addEventListener('click',()=>$('cashClosingOverlay').classList.remove('show'));
+$('ordersBackBtn').addEventListener('click',backToOrderStatuses);
+$('orderShippingOptions').addEventListener('click',openOrderChannelOptions);
+$('closeOrderChannels').addEventListener('click',()=>$('orderChannelsOverlay').classList.remove('show'));
+$('doneOrderChannels').addEventListener('click',()=>$('orderChannelsOverlay').classList.remove('show'));
+$('addOrderChannelBtn').addEventListener('click',addOrderChannel);
+$('newOrderChannel').addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();addOrderChannel()}});
+$('closeOrderDetail').addEventListener('click',closeOrderDetails);
+$('cancelOrderDetail').addEventListener('click',closeOrderDetails);
+$('orderDetailForm').addEventListener('submit',saveOrderDetails);
+$('posOrderToggle').addEventListener('change',()=>{if(!$('posOrderToggle').checked)$('posShippingFee').value='0';updatePOSTotals()});
+$('posShippingFee').addEventListener('input',updatePOSTotals);
 $('showActiveOffersBtn').addEventListener('click',openActiveOffers);
 $('closeActiveOffers').addEventListener('click',()=>$('activeOffersOverlay').classList.remove('show'));
 $('doneActiveOffers').addEventListener('click',()=>$('activeOffersOverlay').classList.remove('show'));
