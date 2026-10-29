@@ -29,6 +29,7 @@ main{padding:30px;min-width:0}.top{display:flex;align-items:center;justify-conte
 /* Point of sale */
 .pos-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(380px,.9fr);gap:16px;align-items:start}
 .pos-catalog,.pos-sale{background:var(--panel);border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow);min-width:0}
+.pos-register-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:-10px 0 14px;padding:11px 14px;background:var(--panel);border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow)}.pos-register-indicator{display:flex;align-items:center;gap:10px;min-width:0}.pos-register-dot{width:10px;height:10px;flex:0 0 10px;border-radius:50%;background:var(--red)}.pos-register-dot.open{background:var(--green)}.pos-register-dot.pending{background:var(--brand)}.pos-register-status{display:block;font-weight:800;font-size:12px}.pos-register-detail{display:block;color:var(--muted);font-size:11px}.pos-register-controls{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.pos-register-controls button:disabled{opacity:.5;cursor:not-allowed}
 .pos-catalog{padding:14px}.pos-filter-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;align-items:center;margin-bottom:13px}
 .pos-catalog-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px}.pos-catalog-head h2{font-size:16px;margin:0}.pos-active-offers-btn{background:var(--soft);color:var(--ink);padding:8px 11px;font-size:12px}.pos-active-offers-btn:hover{background:var(--computed-bg)}
 .pos-search{position:relative}.pos-search input,.pos-select,.pos-sale input,.pos-sale select,.pos-sale textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--input-bg);color:var(--ink);outline:none}
@@ -60,6 +61,7 @@ body.dark .pos-filter-row select,body.dark .pos-filter-row input,body.dark .pos-
 @media(max-width:1250px){.pos-layout{grid-template-columns:minmax(0,1fr) minmax(350px,.9fr)}.pos-product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pos-filter-row{grid-template-columns:1fr 1fr}.pos-search-tools{grid-column:1/-1}}
 @media(max-width:900px){.pos-layout{grid-template-columns:1fr}.pos-sale{position:static}.pos-product-grid{max-height:420px}}
 @media(max-width:520px){.pos-filter-row{grid-template-columns:1fr}.pos-search-tools,.pos-barcode-help{grid-column:auto}.pos-product-grid{grid-template-columns:repeat(2,minmax(0,1fr));min-height:200px}.pos-cart-head,.pos-cart-row{grid-template-columns:minmax(0,1fr) 74px 60px 65px 22px;gap:4px}.pos-cart-head{font-size:9px}.pos-sale{padding:12px}.pos-sale-header{align-items:flex-start;flex-direction:column}.pos-sale-actions{width:100%;justify-content:flex-end}.pos-payment-methods{grid-template-columns:repeat(2,minmax(0,1fr))}.offer-payment-grid,.offer-date-grid{grid-template-columns:1fr}.offer-categories{grid-template-columns:1fr}}
+@media(max-width:520px){.pos-register-bar{align-items:flex-start;flex-direction:column}.pos-register-controls{width:100%;justify-content:stretch}.pos-register-controls button{flex:1}}
 
 /* Beige theme overrides */
 .logo{background:linear-gradient(135deg,#d6c1a2,#9b805b)}
@@ -139,7 +141,7 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
     <button data-page="ventas"><span class="ico">🛒</span> Punto de venta</button>
     <button data-page="reportes"><span class="ico">▥</span> Reportes</button>
   </nav>
-  <div class="sidebar-foot"><button id="settingsBtn" class="theme-toggle" type="button">⚙ <span>Ajustes</span></button><button id="themeToggle" class="theme-toggle" type="button" aria-label="Activar modo oscuro" title="Cambiar tema">☾ <span>Modo oscuro</span></button><button id="versionNotesBtn" class="theme-toggle" type="button">ⓘ <span>Notas de la versión</span></button><div style="margin-top:12px">Versión 2.12 · Datos guardados en esta computadora y navegador.</div></div>
+  <div class="sidebar-foot"><button id="settingsBtn" class="theme-toggle" type="button">⚙ <span>Ajustes</span></button><button id="themeToggle" class="theme-toggle" type="button" aria-label="Activar modo oscuro" title="Cambiar tema">☾ <span>Modo oscuro</span></button><button id="versionNotesBtn" class="theme-toggle" type="button">ⓘ <span>Notas de la versión</span></button><div style="margin-top:12px">Versión 2.13 · Datos guardados en esta computadora y navegador.</div></div>
 </aside>
 <main>
   <section id="page-inventario" class="page active">
@@ -161,6 +163,7 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
   </section>
   <section id="page-ventas" class="page">
    <div class="top"><div><div class="eyebrow">CAJA</div><h1>🛒 Punto de venta</h1><p class="subtitle">Selecciona productos del inventario para registrar una venta.</p></div><div class="pos-topright"><span class="pill">Q · Quetzales</span><span class="pos-datetime"><span id="posDate"></span><span id="posTime"></span></span><span class="pos-user-icon" aria-label="Usuario">♙</span></div></div>
+   <div class="pos-register-bar"><div class="pos-register-indicator"><span id="cashRegisterDot" class="pos-register-dot" aria-hidden="true"></span><div><strong id="cashRegisterStatus" class="pos-register-status" aria-live="polite">Caja cerrada</strong><small id="cashRegisterDetail" class="pos-register-detail">Abre la caja para iniciar las ventas del día.</small></div></div><div class="pos-register-controls"><button type="button" id="openCashRegisterBtn" class="btn-primary btn-small">＋ Apertura de caja</button><button type="button" id="closeCashRegisterBtn" class="btn-light btn-small" disabled>▣ Cierre de caja</button></div></div>
    <div class="pos-layout">
     <section class="pos-catalog" aria-label="Catálogo de productos">
      <div class="pos-catalog-head"><h2>Productos</h2><button type="button" class="pos-active-offers-btn" id="showActiveOffersBtn">🏷 Ofertas activas (0)</button></div>
@@ -294,8 +297,8 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
 </div>
 <div class="overlay" id="versionNotesOverlay" role="dialog" aria-modal="true" aria-labelledby="versionNotesTitle" style="z-index:20">
  <div class="modal" style="width:min(500px,100%)">
-  <div class="modal-head"><div><h2 id="versionNotesTitle">Notas de la versión 2.12</h2><p>Avance actual del proyecto</p></div><button class="x" id="closeVersionNotes" aria-label="Cerrar notas de la versión">×</button></div>
-  <div class="form"><p style="margin:0;color:var(--ink)">Los descuentos por producto redondean el total de cada línea al quetzal más cercano, con la misma regla aplicada al descuento general.</p></div>
+  <div class="modal-head"><div><h2 id="versionNotesTitle">Notas de la versión 2.13</h2><p>Avance actual del proyecto</p></div><button class="x" id="closeVersionNotes" aria-label="Cerrar notas de la versión">×</button></div>
+  <div class="form"><p style="margin:0;color:var(--ink)">El Punto de venta ahora requiere abrir la caja cada día y permite registrar la apertura y el cierre con el efectivo esperado.</p></div>
   <div class="modal-actions"><span></span><button type="button" class="btn-light" id="doneVersionNotes">Cerrar</button></div>
  </div>
 </div>
@@ -333,6 +336,18 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
    </div>
    <div class="modal-actions"><button type="button" class="btn-light" id="cancelOfferForm">Cancelar</button><button type="submit" class="btn-primary">Guardar oferta</button></div>
   </form>
+ </div>
+</div>
+<div class="overlay" id="cashOpeningOverlay" role="dialog" aria-modal="true" aria-labelledby="cashOpeningTitle" style="z-index:50">
+ <div class="modal" style="width:min(480px,100%)">
+  <div class="modal-head"><div><h2 id="cashOpeningTitle">Apertura de caja</h2><p>Registra el efectivo inicial antes de comenzar las ventas de hoy.</p></div><button class="x" id="closeCashOpening" aria-label="Cerrar apertura de caja">×</button></div>
+  <form id="cashOpeningForm"><div class="form"><div class="field"><label for="cashOpeningAmount">Efectivo inicial en caja (Q)</label><input id="cashOpeningAmount" type="number" min="0" step="0.01" value="0.00" required></div><p class="hint" style="margin-bottom:0">El monto se usará para calcular el efectivo esperado al cierre.</p></div><div class="modal-actions"><button type="button" class="btn-light" id="cancelCashOpening">Cancelar</button><button type="submit" class="btn-primary">Abrir caja</button></div></form>
+ </div>
+</div>
+<div class="overlay" id="cashClosingOverlay" role="dialog" aria-modal="true" aria-labelledby="cashClosingTitle" style="z-index:50">
+ <div class="modal" style="width:min(520px,100%)">
+  <div class="modal-head"><div><h2 id="cashClosingTitle">Cierre de caja</h2><p id="cashClosingDate"></p></div><button class="x" id="closeCashClosing" aria-label="Cerrar cierre de caja">×</button></div>
+  <form id="cashClosingForm"><div class="form"><div class="sale-receipt-totals"><div class="sale-receipt-line"><span>Efectivo de apertura</span><strong id="cashClosingOpening">Q0.00</strong></div><div class="sale-receipt-line"><span>Ventas cobradas en efectivo</span><strong id="cashClosingSales">Q0.00</strong></div><div class="sale-receipt-line total"><span>Efectivo esperado</span><strong id="cashClosingExpected">Q0.00</strong></div></div><div class="field" style="margin-top:16px"><label for="cashClosingCounted">Efectivo contado en caja (Q)</label><input id="cashClosingCounted" type="number" min="0" step="0.01" required></div><div class="computed"><span>Diferencia de caja</span><strong id="cashClosingDifference">Q0.00</strong></div></div><div class="modal-actions"><button type="button" class="btn-light" id="cancelCashClosing">Cancelar</button><button type="submit" class="btn-primary">Confirmar cierre</button></div></form>
  </div>
 </div>
 <div class="overlay" id="posPriceOverlay" role="dialog" aria-modal="true" aria-labelledby="posPriceTitle" style="z-index:35">
@@ -385,13 +400,15 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
 const $=id=>document.getElementById(id);
 const STORAGE_KEY='prendaStudioInventory_v1';
 const SALES_KEY='prendaStudioSales_v1';
+const CASH_REGISTER_KEY='prendaStudioCashRegister_v1';
 const OFFERS_KEY='prendaStudioOffers_v1';
 const SETTINGS_KEY='prendaStudioSettings_v1';
-let products=[], sales=[], offers=[], posCart=[], paymentMethod='Efectivo', posCashTouched=false, financialValuesVisible=true, editingOfferId=null, editingPOSPriceId=null, editingId=null, skuManuallyEdited=false, syncSource=null, currentPhoto='', cameraStream=null, cameraRequestId=0, quickOptionKind='category', currentBarcodeSvg='', currentBarcodeSku='', barcodePreviewUrl='', scanStream=null, scanRequestId=0, scanActive=false, scanDetector=null, scanFrame=0, scanCanvas=null, scanLastAttempt=0, scanAction='inventory';
+let products=[], sales=[], cashSessions=[], posCart=[], offers=[], paymentMethod='Efectivo', posCashTouched=false, financialValuesVisible=true, editingOfferId=null, editingPOSPriceId=null, editingId=null, skuManuallyEdited=false, syncSource=null, currentPhoto='', cameraStream=null, cameraRequestId=0, quickOptionKind='category', currentBarcodeSvg='', currentBarcodeSku='', barcodePreviewUrl='', scanStream=null, scanRequestId=0, scanActive=false, scanDetector=null, scanFrame=0, scanCanvas=null, scanLastAttempt=0, scanAction='inventory', closingCashSessionId=null;
 const CAT_KEY='prendaStudioCategories_v1', COLOR_KEY='prendaStudioColors_v1';
 let categories=['Camisetas','Pantalones','Vestidos','Accesorios','Calzado'], colors=['N/A','Negro','Blanco','Azul','Rojo','Verde','Gris','Beige','Rosado'];
 try{products=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');if(!Array.isArray(products))products=[]}catch(e){products=[]}
 try{sales=JSON.parse(localStorage.getItem(SALES_KEY)||'[]');if(!Array.isArray(sales))sales=[]}catch(e){sales=[]}
+try{cashSessions=JSON.parse(localStorage.getItem(CASH_REGISTER_KEY)||'[]');if(!Array.isArray(cashSessions))cashSessions=[]}catch(e){cashSessions=[]}
 try{offers=JSON.parse(localStorage.getItem(OFFERS_KEY)||'[]');if(!Array.isArray(offers))offers=[]}catch(e){offers=[]}
 try{const saved=JSON.parse(localStorage.getItem(CAT_KEY)||'null');if(Array.isArray(saved))categories=saved}catch(e){}
 try{const saved=JSON.parse(localStorage.getItem(COLOR_KEY)||'null');if(Array.isArray(saved))colors=saved}catch(e){}
@@ -576,10 +593,70 @@ function updatePOSTotals(){
  $('posOtherMethodWrap').style.display=paymentMethod==='Otro'?'block':'none';
  if(paymentMethod==='Efectivo'&&!posCashTouched)$('posCashReceived').value=total.toFixed(2);
  const received=paymentMethod==='Efectivo'?Number($('posCashReceived').value||0):total;
- $('posChange').textContent=money(Math.max(0,received-total));$('registerSaleBtn').disabled=posCart.length===0;
+ $('posChange').textContent=money(Math.max(0,received-total));$('registerSaleBtn').disabled=posCart.length===0||!cashRegisterCanSell();
 }
+function saveCashSessions(){try{localStorage.setItem(CASH_REGISTER_KEY,JSON.stringify(cashSessions));return true}catch(e){toast('No se pudo guardar la apertura o el cierre de caja en este navegador.');return false}}
+function getTodayCashSession(){const today=localDateValue();return cashSessions.find(session=>session.date===today)||null}
+function getOpenCashSession(){return cashSessions.find(session=>!session.closedAt)||null}
+function cashRegisterCanSell(){const session=getOpenCashSession();return Boolean(session&&session.date===localDateValue()&&!session.closedAt)}
+function cashSessionSalesTotal(sessionId){return roundMoney(sales.reduce((sum,sale)=>sum+(sale.cashSessionId===sessionId&&sale.paymentMethodType==='Efectivo'?Number(sale.total||0):0),0))}
+function cashSessionExpected(session){return roundMoney(Number(session.openingAmount||0)+cashSessionSalesTotal(session.id))}
+function cashDateTimeLabel(value){return value?new Intl.DateTimeFormat('es-GT',{dateStyle:'medium',timeStyle:'short'}).format(new Date(value)):'—'}
+function updateCashRegisterUI(){
+ const active=getOpenCashSession(),todaySession=getTodayCashSession(),canSell=cashRegisterCanSell();let title='Caja cerrada',detail='Abre la caja para iniciar las ventas del día.';
+ if(active&&active.date===localDateValue()){title='Caja abierta';detail='Apertura: '+cashDateTimeLabel(active.openedAt)+' · Fondo inicial '+money(active.openingAmount)}
+ else if(active){title='Caja pendiente de cierre';detail='Cierra la caja del '+active.date+' antes de abrir la de hoy.'}
+ else if(todaySession&&todaySession.closedAt){title='Caja cerrada hoy';detail='Cierre: '+cashDateTimeLabel(todaySession.closedAt)+' · No se puede reabrir hoy.'}
+ $('cashRegisterStatus').textContent=title;$('cashRegisterDetail').textContent=detail;$('cashRegisterDot').classList.toggle('open',canSell);$('cashRegisterDot').classList.toggle('pending',Boolean(active&&!canSell));
+ $('openCashRegisterBtn').disabled=Boolean(active||todaySession);$('closeCashRegisterBtn').disabled=!active;
+ $('addExtraProductBtn').disabled=!canSell;$('posBarcodeAddBtn').disabled=!canSell;
+}
+function ensureCashRegisterOpen(){
+ if(cashRegisterCanSell())return true;
+ const active=getOpenCashSession(),todaySession=getTodayCashSession();
+ if(active)toast(active.date===localDateValue()?'La caja está cerrada.':'Cierra primero la caja pendiente del '+active.date+'.');
+ else if(todaySession&&todaySession.closedAt)toast('La caja ya se cerró hoy y no puede reabrirse.');
+ else{toast('Abre la caja antes de agregar productos o registrar ventas.');openCashOpeningForm()}
+ return false;
+}
+function openCashOpeningForm(){
+ const active=getOpenCashSession(),todaySession=getTodayCashSession();
+ if(active){toast(active.date===localDateValue()?'La caja ya está abierta.':'Cierra primero la caja pendiente del '+active.date+'.');return}
+ if(todaySession){toast('La caja ya se cerró hoy y no puede reabrirse.');return}
+ $('cashOpeningForm').reset();$('cashOpeningAmount').value='0.00';$('cashOpeningOverlay').classList.add('show');setTimeout(()=>$('cashOpeningAmount').focus(),30);
+}
+function closeCashOpeningForm(){$('cashOpeningOverlay').classList.remove('show')}
+function saveCashOpening(event){
+ event.preventDefault();const amount=Number($('cashOpeningAmount').value);
+ if(!Number.isFinite(amount)||amount<0){toast('Ingresa un monto inicial válido.');$('cashOpeningAmount').focus();return}
+ if(getOpenCashSession()){toast('Ya hay una caja abierta.');closeCashOpeningForm();updateCashRegisterUI();return}
+ if(getTodayCashSession()){toast('La caja ya se abrió y cerró hoy; no puede abrirse otra vez.');closeCashOpeningForm();updateCashRegisterUI();return}
+ const previous=cashSessions,session={id:'C-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase(),date:localDateValue(),openedAt:new Date().toISOString(),openingAmount:roundMoney(amount),closedAt:null};cashSessions=[session,...cashSessions];
+ if(!saveCashSessions()){cashSessions=previous;return}
+ closeCashOpeningForm();renderPOS();toast('Caja abierta. Ya puedes agregar productos y registrar ventas.');
+}
+function openCashClosingForm(){
+ const session=getOpenCashSession();if(!session){toast('No hay una caja abierta para cerrar.');return}
+ if(posCart.length){toast('Registra la venta actual o limpia la venta antes de cerrar la caja.');return}
+ closingCashSessionId=session.id;$('cashClosingDate').textContent='Apertura: '+cashDateTimeLabel(session.openedAt);$('cashClosingOpening').textContent=money(session.openingAmount);$('cashClosingSales').textContent=money(cashSessionSalesTotal(session.id));$('cashClosingExpected').textContent=money(cashSessionExpected(session));$('cashClosingCounted').value='';$('cashClosingDifference').textContent='Ingresa el efectivo contado';$('cashClosingDifference').style.color='var(--muted)';$('cashClosingOverlay').classList.add('show');setTimeout(()=>$('cashClosingCounted').focus(),30);
+}
+function updateCashClosingDifference(){
+ const session=cashSessions.find(item=>item.id===closingCashSessionId);if(!session)return;
+ const raw=$('cashClosingCounted').value;if(raw===''){$('cashClosingDifference').textContent='Ingresa el efectivo contado';$('cashClosingDifference').style.color='var(--muted)';return}
+ const difference=roundMoney(Number(raw)-cashSessionExpected(session));$('cashClosingDifference').textContent=(difference>0?'+':difference<0?'−':'')+money(Math.abs(difference));$('cashClosingDifference').style.color=difference===0?'var(--green)':difference<0?'var(--red)':'var(--brand)';
+}
+function saveCashClosing(event){
+ event.preventDefault();const session=cashSessions.find(item=>item.id===closingCashSessionId),counted=Number($('cashClosingCounted').value);if(!session||session.closedAt){toast('La caja ya no está abierta.');return}
+ if(posCart.length){toast('Limpia o registra la venta actual antes de cerrar.');return}
+ if(!Number.isFinite(counted)||counted<0){toast('Ingresa el efectivo contado en caja.');$('cashClosingCounted').focus();return}
+ const expected=cashSessionExpected(session),previous=cashSessions;cashSessions=cashSessions.map(item=>item.id===session.id?{...item,closedAt:new Date().toISOString(),cashSales:cashSessionSalesTotal(session.id),expectedCash:expected,countedCash:roundMoney(counted),difference:roundMoney(counted-expected)}:item);
+ if(!saveCashSessions()){cashSessions=previous;return}
+ $('cashClosingOverlay').classList.remove('show');closingCashSessionId=null;renderPOS();const difference=roundMoney(counted-expected);toast('Caja cerrada. Diferencia: '+(difference<0?'−':'')+money(Math.abs(difference))+'.');
+}
+function enterPOS(){renderPOS();const active=getOpenCashSession(),todaySession=getTodayCashSession();if(active&&active.date!==localDateValue())toast('Debes cerrar la caja pendiente antes de abrir la de hoy.');else if(todaySession&&todaySession.closedAt)toast('La caja ya fue cerrada hoy. Las ventas están deshabilitadas.');else if(!active&&!todaySession)openCashOpeningForm()}
 function renderPOS(){
  if(!$('posProductGrid'))return;
+ updateCashRegisterUI();
  updateActiveOffersButton();
  populatePOSFilters();const grid=$('posProductGrid'),search=$('posSearch').value.trim().toLowerCase(),category=$('posCategoryFilter').value,color=$('posColorFilter').value,stockOnly=$('posStockOnly').checked;
  const visible=products.filter(p=>{
@@ -599,7 +676,7 @@ function renderPOS(){
   const activeOffer=offerForProduct(product),percent=offerPercentForProduct(product),price=document.createElement('span');price.className='pos-product-price';price.textContent=money(getPOSUnitPrice(product));
   if(percent>0){const original=document.createElement('del');original.className='pos-price-old';original.textContent=money(product.price);const badge=document.createElement('small');badge.className='pos-offer-badge';badge.textContent='Oferta · '+percent+'%';const remaining=document.createElement('small');remaining.className='pos-offer-days';remaining.textContent=offerCountdownLabel(activeOffer);info.append(sku,name,meta,original,price,badge,remaining)}else info.append(sku,name,meta,price);
   const stock=document.createElement('span');stock.className='pos-product-stock';stock.textContent='Stock: '+Number(product.qty||0);
-  const add=document.createElement('button');add.type='button';add.className='pos-add-btn';add.textContent='+';add.setAttribute('aria-label','Agregar '+(product.name||'producto')+' a la venta');add.disabled=posCartQty(product.id)>=Number(product.qty||0);add.onclick=()=>addPOSProduct(product.id);
+  const add=document.createElement('button');add.type='button';add.className='pos-add-btn';add.textContent='+';add.setAttribute('aria-label','Agregar '+(product.name||'producto')+' a la venta');add.disabled=!cashRegisterCanSell()||posCartQty(product.id)>=Number(product.qty||0);add.onclick=()=>addPOSProduct(product.id);
   info.append(stock,add);card.appendChild(info);grid.appendChild(card);
  });
  renderPOSCart();
@@ -624,6 +701,7 @@ function renderPOSCart(){
  updatePOSTotals();
 }
 function addPOSProduct(productId){
+ if(!ensureCashRegisterOpen())return;
  const product=products.find(p=>p.id===productId);if(!product)return;
  const existing=posCart.find(entry=>entry.productId===productId),quantity=existing?existing.quantity:0;
  if(quantity>=Number(product.qty||0)){toast('No hay más existencias disponibles de este producto.');return}
@@ -633,7 +711,7 @@ function addPOSProduct(productId){
 function openExtraProductForm(){$('extraProductForm').reset();$('extraProductQuantity').value='1';$('extraProductOverlay').classList.add('show');setTimeout(()=>$('extraProductName').focus(),30)}
 function closeExtraProductForm(){$('extraProductOverlay').classList.remove('show')}
 function addExtraProductToSale(event){
- event.preventDefault();const name=$('extraProductName').value.trim(),unitPrice=Number($('extraProductPrice').value),quantity=Number($('extraProductQuantity').value);
+ event.preventDefault();if(!ensureCashRegisterOpen())return;const name=$('extraProductName').value.trim(),unitPrice=Number($('extraProductPrice').value),quantity=Number($('extraProductQuantity').value);
  if(!name||!Number.isFinite(unitPrice)||unitPrice<0||!Number.isInteger(quantity)||quantity<1){toast('Revisa el nombre, precio y cantidad del producto extra.');return}
  const id='extra_'+Date.now().toString(36)+'_'+Math.random().toString(16).slice(2,7);posCart.push({productId:id,id,custom:true,name,sku:'',category:'Venta extra',color:'',quantity,unitPrice:roundMoney(unitPrice),manualPrice:true,discountType:'amount',discountValue:0});closeExtraProductForm();renderPOS();toast('Producto extra agregado a la venta.');
 }
@@ -659,19 +737,21 @@ function savePOSPriceChange(event){
 function setPOSQuantity(productId,quantity){
  const entry=posCart.find(item=>item.productId===productId),product=entry&&cartEntryProduct(entry);if(!product||!entry)return;
  if(quantity<1){removePOSProduct(productId);return}
+ if(quantity>entry.quantity&&!ensureCashRegisterOpen())return;
  if(!entry.custom&&quantity>Number(product.qty||0)){toast('La cantidad supera las existencias disponibles.');return}
  entry.quantity=quantity;renderPOS();
 }
 function removePOSProduct(productId){posCart=posCart.filter(entry=>entry.productId!==productId);renderPOS()}
 function clearPOSSale(){if(posCart.length&&!confirm('¿Limpiar todos los productos de la venta actual?'))return;posCart=[];$('posSaleNotes').value='';$('posDiscount').value='0';$('posOtherMethod').value='';posCashTouched=false;renderPOS()}
 function registerPOSSale(){
+ if(!ensureCashRegisterOpen())return;
  if(!posCart.length){toast('Agrega al menos un producto a la venta.');return}
  if(paymentMethod==='Otro'&&!$('posOtherMethod').value.trim()){toast('Escribe el nombre del otro método de pago.');$('posOtherMethod').focus();return}
  const saleItems=[];
  for(const entry of posCart){const product=cartEntryProduct(entry);if(!product||(!entry.custom&&entry.quantity>Number(product.qty||0))){toast('Las existencias cambiaron. Revisa las cantidades antes de registrar.');renderPOS();return}const unitPrice=Number(entry.unitPrice||0),unitCost=entry.custom?0:Number(product.cost||0),gross=roundMoney(unitPrice*entry.quantity),itemDiscount=cartEntryDiscount(entry),lineTotal=roundMoney(Math.max(0,gross-itemDiscount)),unitProfit=roundMoney(unitPrice-unitCost);saleItems.push({productId:entry.custom?null:product.id,isExtra:Boolean(entry.custom),sku:product.sku||'',name:product.name||'Producto sin nombre',category:entry.custom?'Venta extra':product.category||'',color:product.color||'N/A',quantity:entry.quantity,unitPrice,unitCost,subtotal:gross,discountType:entry.discountType||'amount',discountValue:Number(entry.discountValue||0),discount:itemDiscount,total:lineTotal,unitProfit,profit:roundMoney(lineTotal-unitCost*entry.quantity)})}
  const {subtotal,itemDiscount,discount,total,roundingAdjustment}=getPOSTotals(),received=paymentMethod==='Efectivo'?Number($('posCashReceived').value||0):total;
  if(paymentMethod==='Efectivo'&&received<total){toast('El monto recibido no puede ser menor que el total.');$('posCashReceived').focus();return}
- const itemProfit=saleItems.reduce((sum,item)=>sum+item.profit,0),now=new Date(),sale={id:'V-'+now.getTime().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase(),createdAt:now.toISOString(),items:saleItems,subtotal,itemDiscount,discount,roundingAdjustment,discountType:$('posDiscountType').value,discountValue:Number($('posDiscount').value||0),total,profit:roundMoney(itemProfit-discount+roundingAdjustment),paymentMethod:paymentMethod==='Otro'?$('posOtherMethod').value.trim():paymentMethod,paymentMethodType:paymentMethod,amountReceived:roundMoney(received),change:roundMoney(Math.max(0,received-total)),notes:$('posSaleNotes').value.trim()};
+ const itemProfit=saleItems.reduce((sum,item)=>sum+item.profit,0),cashSession=getOpenCashSession(),now=new Date(),sale={id:'V-'+now.getTime().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase(),cashSessionId:cashSession.id,createdAt:now.toISOString(),items:saleItems,subtotal,itemDiscount,discount,roundingAdjustment,discountType:$('posDiscountType').value,discountValue:Number($('posDiscount').value||0),total,profit:roundMoney(itemProfit-discount+roundingAdjustment),paymentMethod:paymentMethod==='Otro'?$('posOtherMethod').value.trim():paymentMethod,paymentMethodType:paymentMethod,amountReceived:roundMoney(received),change:roundMoney(Math.max(0,received-total)),notes:$('posSaleNotes').value.trim()};
  const oldSales=localStorage.getItem(SALES_KEY),nextSales=[sale,...sales],previousProducts=products;
  try{localStorage.setItem(SALES_KEY,JSON.stringify(nextSales))}catch(e){toast('No se pudo guardar la venta. Libera espacio del navegador e inténtalo de nuevo.');return}
  products=products.map(product=>{const item=posCart.find(entry=>!entry.custom&&entry.productId===product.id);return item?{...product,qty:Number(product.qty||0)-item.quantity}:product});
@@ -871,6 +951,7 @@ function decodeCode128Video(video){
  return null;
 }
 async function openBarcodeScanner(action='inventory'){
+ if(action==='posAdd'&&!ensureCashRegisterOpen())return;
  scanAction=action;
  $('barcodeScanTitle').textContent=action==='posAdd'?'Escanear para agregar a la venta':action==='posSearch'?'Buscar producto con código de barras':'Buscar con código de barras';
  $('barcodeScanMessage').textContent='Activando la cámara…';
@@ -1057,13 +1138,22 @@ document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',(
  document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x===b));
  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
  $('page-'+b.dataset.page).classList.add('active');
- if(b.dataset.page==='ventas')renderPOS();
+ if(b.dataset.page==='ventas')enterPOS();
 }));
 $('posSearch').addEventListener('input',renderPOS);
 $('posCategoryFilter').addEventListener('change',renderPOS);
 $('posColorFilter').addEventListener('change',renderPOS);
 $('posStockOnly').addEventListener('change',renderPOS);
 $('clearSaleBtn').addEventListener('click',clearPOSSale);
+$('openCashRegisterBtn').addEventListener('click',openCashOpeningForm);
+$('closeCashRegisterBtn').addEventListener('click',openCashClosingForm);
+$('cashOpeningForm').addEventListener('submit',saveCashOpening);
+$('closeCashOpening').addEventListener('click',closeCashOpeningForm);
+$('cancelCashOpening').addEventListener('click',closeCashOpeningForm);
+$('cashClosingForm').addEventListener('submit',saveCashClosing);
+$('cashClosingCounted').addEventListener('input',updateCashClosingDifference);
+$('closeCashClosing').addEventListener('click',()=>$('cashClosingOverlay').classList.remove('show'));
+$('cancelCashClosing').addEventListener('click',()=>$('cashClosingOverlay').classList.remove('show'));
 $('showActiveOffersBtn').addEventListener('click',openActiveOffers);
 $('closeActiveOffers').addEventListener('click',()=>$('activeOffersOverlay').classList.remove('show'));
 $('doneActiveOffers').addEventListener('click',()=>$('activeOffersOverlay').classList.remove('show'));
@@ -1107,7 +1197,7 @@ $('posBarcodeAddBtn').addEventListener('click',()=>openBarcodeScanner('posAdd'))
 $('registerSaleBtn').addEventListener('click',registerPOSSale);
 function updatePOSClock(){const now=new Date();$('posDate').textContent=new Intl.DateTimeFormat('es-GT',{weekday:'short',day:'2-digit',month:'short',year:'numeric'}).format(now);$('posTime').textContent=new Intl.DateTimeFormat('es-GT',{hour:'2-digit',minute:'2-digit'}).format(now)}
 updatePOSClock();setInterval(updatePOSClock,30000);
-let offerDateSnapshot=localDateValue();setInterval(()=>{const today=localDateValue();if(today!==offerDateSnapshot){offerDateSnapshot=today;refreshOfferCartPrices();if($('activeOffersOverlay').classList.contains('show'))renderActiveOffersList();if($('offersOverlay').classList.contains('show'))renderOffersList()}},60000);
+let offerDateSnapshot=localDateValue();setInterval(()=>{const today=localDateValue();if(today!==offerDateSnapshot){offerDateSnapshot=today;refreshOfferCartPrices();if($('activeOffersOverlay').classList.contains('show'))renderActiveOffersList();if($('offersOverlay').classList.contains('show'))renderOffersList();if($('page-ventas').classList.contains('active'))enterPOS()}},60000);
 const THEME_KEY='prendaStudioTheme_v1';
 function setTheme(dark){
  document.body.classList.toggle('dark',dark);
