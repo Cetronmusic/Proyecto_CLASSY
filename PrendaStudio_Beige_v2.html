@@ -141,9 +141,10 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
   <nav class="nav">
     <button class="active" data-page="inventario"><span class="ico">▦</span> Inventario</button>
     <button data-page="ventas"><span class="ico">🛒</span> Punto de venta</button>
+    <button data-page="pedidos"><span class="ico">▤</span> Pedidos</button>
     <button data-page="reportes"><span class="ico">▥</span> Reportes</button>
   </nav>
-  <div class="sidebar-foot"><button id="settingsBtn" class="theme-toggle" type="button">⚙ <span>Ajustes</span></button><button id="themeToggle" class="theme-toggle" type="button" aria-label="Activar modo oscuro" title="Cambiar tema">☾ <span>Modo oscuro</span></button><button id="versionNotesBtn" class="theme-toggle" type="button">ⓘ <span>Notas de la versión</span></button><div style="margin-top:12px">Versión 2.16 · Datos guardados en esta computadora y navegador.</div></div>
+  <div class="sidebar-foot"><button id="settingsBtn" class="theme-toggle" type="button">⚙ <span>Ajustes</span></button><button id="themeToggle" class="theme-toggle" type="button" aria-label="Activar modo oscuro" title="Cambiar tema">☾ <span>Modo oscuro</span></button><button id="versionNotesBtn" class="theme-toggle" type="button">ⓘ <span>Notas de la versión</span></button><div style="margin-top:12px">Versión 2.17 · Datos guardados en esta computadora y navegador.</div></div>
 </aside>
 <main>
   <section id="page-inventario" class="page active">
@@ -180,6 +181,7 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
     </section>
     <section class="pos-sale" aria-label="Venta actual">
      <div class="pos-sale-header"><h2>Venta actual</h2><div class="pos-sale-actions"><button type="button" class="btn-light btn-small" id="addExtraProductBtn">＋ Venta extra</button><button type="button" class="btn-light btn-small" id="clearSaleBtn">▤ Limpiar venta</button></div></div>
+     <label class="pos-stock-toggle" style="width:max-content;margin:0 0 10px"><input id="posOrderToggle" type="checkbox"> Pedido</label>
      <div class="pos-cart-head"><span>Producto</span><span style="text-align:center">Cantidad</span><span style="text-align:right">Precio</span><span style="text-align:right">Subtotal</span><span></span></div>
      <div class="hint" style="padding:5px 7px">Puedes pulsar el precio de una línea para cambiarlo solo en esta venta.</div>
      <div class="pos-extra-help">Las ventas extra no se agregan al inventario.</div>
@@ -204,6 +206,7 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
     </section>
    </div>
   </section>
+  <section id="page-pedidos" class="page"><div class="top"><div><div class="eyebrow">OPERACIONES</div><h1>Pedidos</h1><p class="subtitle">Consulta las ventas registradas como pedido.</p></div></div><div class="panel"><div class="panel-head"><div><h2>Pedidos registrados</h2><p id="ordersCount">0 pedidos</p></div></div><div class="tablewrap"><table><thead><tr><th>Fecha</th><th>Número</th><th>Productos</th><th>Método de pago</th><th>Total</th></tr></thead><tbody id="orderRows"></tbody></table></div><div id="ordersEmpty" class="empty"><strong>Aún no hay pedidos</strong>Marca “Pedido” en la venta actual para que aparezca aquí.</div></div></section>
   <section id="page-reportes" class="page"><div class="top"><div><div class="eyebrow">RESUMEN DEL NEGOCIO</div><h1>Reportes</h1><p class="subtitle">Los reportes de ventas se habilitarán cuando construyamos el punto de venta.</p></div></div><div class="panel"><div class="coming"><div class="big">▥</div><h2>Reportes en preparación</h2><p>Más adelante aquí podrás consultar ventas, ganancia realizada, productos más vendidos y movimientos de inventario.</p></div></div></section>
 </main>
 </div>
@@ -299,8 +302,8 @@ body.dark .btn-danger{background:#493027!important;color:#e4b9a9!important}
 </div>
 <div class="overlay" id="versionNotesOverlay" role="dialog" aria-modal="true" aria-labelledby="versionNotesTitle" style="z-index:20">
  <div class="modal" style="width:min(500px,100%)">
-  <div class="modal-head"><div><h2 id="versionNotesTitle">Notas de la versión 2.16</h2><p>Avance actual del proyecto</p></div><button class="x" id="closeVersionNotes" aria-label="Cerrar notas de la versión">×</button></div>
-  <div class="form"><p style="margin:0;color:var(--ink)">El cierre de caja muestra las ventas y los gastos de cada método de pago; solo solicita contar y cuadrar el efectivo.</p></div>
+  <div class="modal-head"><div><h2 id="versionNotesTitle">Notas de la versión 2.17</h2><p>Avance actual del proyecto</p></div><button class="x" id="closeVersionNotes" aria-label="Cerrar notas de la versión">×</button></div>
+  <div class="form"><p style="margin:0;color:var(--ink)">Se agregó la sección Pedidos para consultar las operaciones marcadas como pedido desde el punto de venta.</p></div>
   <div class="modal-actions"><span></span><button type="button" class="btn-light" id="doneVersionNotes">Cerrar</button></div>
  </div>
 </div>
@@ -790,7 +793,7 @@ function setPOSQuantity(productId,quantity){
  entry.quantity=quantity;renderPOS();
 }
 function removePOSProduct(productId){posCart=posCart.filter(entry=>entry.productId!==productId);renderPOS()}
-function clearPOSSale(){if(posCart.length&&!confirm('¿Limpiar todos los productos de la venta actual?'))return;posCart=[];$('posSaleNotes').value='';$('posDiscount').value='0';$('posOtherMethod').value='';posCashTouched=false;renderPOS()}
+function clearPOSSale(){if(posCart.length&&!confirm('¿Limpiar todos los productos de la venta actual?'))return;posCart=[];$('posSaleNotes').value='';$('posDiscount').value='0';$('posOtherMethod').value='';$('posOrderToggle').checked=false;posCashTouched=false;renderPOS()}
 function registerPOSSale(){
  if(!ensureCashRegisterOpen())return;
  if(!posCart.length){toast('Agrega al menos un producto a la venta.');return}
@@ -799,7 +802,9 @@ function registerPOSSale(){
  for(const entry of posCart){const product=cartEntryProduct(entry);if(!product||(!entry.custom&&entry.quantity>Number(product.qty||0))){toast('Las existencias cambiaron. Revisa las cantidades antes de registrar.');renderPOS();return}const unitPrice=Number(entry.unitPrice||0),unitCost=entry.custom?0:Number(product.cost||0),gross=roundMoney(unitPrice*entry.quantity),itemDiscount=cartEntryDiscount(entry),lineTotal=roundMoney(Math.max(0,gross-itemDiscount)),unitProfit=roundMoney(unitPrice-unitCost);saleItems.push({productId:entry.custom?null:product.id,isExtra:Boolean(entry.custom),sku:product.sku||'',name:product.name||'Producto sin nombre',category:entry.custom?'Venta extra':product.category||'',color:product.color||'N/A',quantity:entry.quantity,unitPrice,unitCost,subtotal:gross,discountType:entry.discountType||'amount',discountValue:Number(entry.discountValue||0),discount:itemDiscount,total:lineTotal,unitProfit,profit:roundMoney(lineTotal-unitCost*entry.quantity)})}
  const {subtotal,itemDiscount,discount,total,roundingAdjustment}=getPOSTotals(),received=paymentMethod==='Efectivo'?Number($('posCashReceived').value||0):total;
  if(paymentMethod==='Efectivo'&&received<total){toast('El monto recibido no puede ser menor que el total.');$('posCashReceived').focus();return}
- const itemProfit=saleItems.reduce((sum,item)=>sum+item.profit,0),cashSession=getOpenCashSession(),now=new Date(),sale={id:'V-'+now.getTime().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase(),cashSessionId:cashSession.id,createdAt:now.toISOString(),items:saleItems,subtotal,itemDiscount,discount,roundingAdjustment,discountType:$('posDiscountType').value,discountValue:Number($('posDiscount').value||0),total,profit:roundMoney(itemProfit-discount+roundingAdjustment),paymentMethod:paymentMethod==='Otro'?$('posOtherMethod').value.trim():paymentMethod,paymentMethodType:paymentMethod,amountReceived:roundMoney(received),change:roundMoney(Math.max(0,received-total)),notes:$('posSaleNotes').value.trim()};
+ const isOrder=$('posOrderToggle').checked;
+ if(isOrder&&!confirm('Esta operación se guardará como un pedido y aparecerá en la sección “Pedidos”. ¿Deseas continuar? Si eliges Cancelar, no se registrará y se desmarcará la opción Pedido.')){$('posOrderToggle').checked=false;return}
+ const itemProfit=saleItems.reduce((sum,item)=>sum+item.profit,0),cashSession=getOpenCashSession(),now=new Date(),sale={id:'V-'+now.getTime().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase(),cashSessionId:cashSession.id,createdAt:now.toISOString(),isOrder,items:saleItems,subtotal,itemDiscount,discount,roundingAdjustment,discountType:$('posDiscountType').value,discountValue:Number($('posDiscount').value||0),total,profit:roundMoney(itemProfit-discount+roundingAdjustment),paymentMethod:paymentMethod==='Otro'?$('posOtherMethod').value.trim():paymentMethod,paymentMethodType:paymentMethod,amountReceived:roundMoney(received),change:roundMoney(Math.max(0,received-total)),notes:$('posSaleNotes').value.trim()};
  const oldSales=localStorage.getItem(SALES_KEY),nextSales=[sale,...sales],previousProducts=products;
  try{localStorage.setItem(SALES_KEY,JSON.stringify(nextSales))}catch(e){toast('No se pudo guardar la venta. Libera espacio del navegador e inténtalo de nuevo.');return}
  products=products.map(product=>{const item=posCart.find(entry=>!entry.custom&&entry.productId===product.id);return item?{...product,qty:Number(product.qty||0)-item.quantity}:product});
@@ -807,7 +812,17 @@ function registerPOSSale(){
   products=previousProducts;try{if(oldSales===null)localStorage.removeItem(SALES_KEY);else localStorage.setItem(SALES_KEY,oldSales)}catch(e){}
   renderPOS();return;
  }
- sales=nextSales;posCart=[];$('posSaleNotes').value='';$('posDiscount').value='0';$('posOtherMethod').value='';posCashTouched=false;render();showSaleSuccess(sale);
+ sales=nextSales;posCart=[];$('posSaleNotes').value='';$('posDiscount').value='0';$('posOtherMethod').value='';$('posOrderToggle').checked=false;posCashTouched=false;render();showSaleSuccess(sale);
+}
+function renderOrders(){
+ const orders=sales.filter(sale=>sale.isOrder),rows=$('orderRows'),empty=$('ordersEmpty');rows.replaceChildren();
+ $('ordersCount').textContent=orders.length+' '+(orders.length===1?'pedido':'pedidos');empty.style.display=orders.length?'none':'block';
+ orders.forEach(order=>{
+  const row=document.createElement('tr'),date=document.createElement('td'),number=document.createElement('td'),items=document.createElement('td'),payment=document.createElement('td'),total=document.createElement('td');
+  date.textContent=new Intl.DateTimeFormat('es-GT',{dateStyle:'medium',timeStyle:'short'}).format(new Date(order.createdAt));number.textContent=order.id;
+  items.textContent=(order.items||[]).map(item=>item.name+' × '+item.quantity).join(', ');payment.textContent=order.paymentMethod||order.paymentMethodType||'—';total.className='money';total.textContent=money(order.total);
+  row.append(date,number,items,payment,total);rows.appendChild(row)
+ });
 }
 function showSaleSuccess(sale){
  $('saleSuccessId').textContent='Comprobante '+sale.id+' · '+new Intl.DateTimeFormat('es-GT',{dateStyle:'medium',timeStyle:'short'}).format(new Date(sale.createdAt));
@@ -816,6 +831,7 @@ function showSaleSuccess(sale){
  const totals=document.createElement('div');totals.className='sale-receipt-totals';const addLine=(label,value,extra='')=>{const line=document.createElement('div');line.className='sale-receipt-line'+(extra?' '+extra:'');const left=document.createElement('span');left.textContent=label;const right=document.createElement('strong');right.textContent=value;line.append(left,right);totals.appendChild(line)};
  addLine('Subtotal',money(sale.subtotal));if(Number(sale.itemDiscount||0)>0)addLine('Descuentos por producto','−'+money(sale.itemDiscount));if(Number(sale.discount||0)>0){const label=sale.discountType==='percent'?'Descuento general ('+sale.discountValue+'%)':'Descuento general';addLine(label,'−'+money(sale.discount))}if(Number(sale.roundingAdjustment||0)!==0)addLine('Ajuste de redondeo',(sale.roundingAdjustment<0?'−':'＋')+money(Math.abs(sale.roundingAdjustment)));addLine('Total',money(sale.total),'total');
  const meta=document.createElement('div');meta.className='sale-receipt-meta';const payment=document.createElement('span');payment.textContent='Método de pago: '+(sale.paymentMethod||sale.paymentMethodType||'—');meta.appendChild(payment);
+ if(sale.isOrder){const order=document.createElement('strong');order.textContent='Tipo de operación: Pedido';meta.appendChild(order)}
  if(sale.paymentMethodType==='Efectivo'){const received=document.createElement('span');received.textContent='Monto recibido: '+money(sale.amountReceived);const change=document.createElement('span');change.textContent='Cambio: '+money(sale.change);meta.append(received,change)}
  if(sale.notes){const note=document.createElement('span');note.textContent='Nota: '+sale.notes;meta.appendChild(note)}
  host.append(items,totals,meta);$('saleSuccessOverlay').classList.add('show');
@@ -1187,6 +1203,7 @@ document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',(
  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
  $('page-'+b.dataset.page).classList.add('active');
  if(b.dataset.page==='ventas')enterPOS();
+ if(b.dataset.page==='pedidos')renderOrders();
 }));
 $('posSearch').addEventListener('input',renderPOS);
 $('posCategoryFilter').addEventListener('change',renderPOS);
